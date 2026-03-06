@@ -169,7 +169,7 @@ tr:hover td{background:#f7fafc}
 <div class="footer">SGI Insight Portal | 삼호그린인베스트먼트</div>
 </div>
 <script>
-const PW_HASH='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8';
+const PW_HASH='03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4';
 async function sha256(m){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(m));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 async function doLogin(){const h=await sha256(document.getElementById('loginPw').value);if(h===PW_HASH){sessionStorage.setItem('sgi','1');document.getElementById('loginOverlay').style.display='none';document.getElementById('app').style.display='block';initApp()}else{document.getElementById('loginError').style.display='block';document.getElementById('loginPw').value=''}}
 document.addEventListener('DOMContentLoaded',()=>{if(sessionStorage.getItem('sgi')==='1'){document.getElementById('loginOverlay').style.display='none';document.getElementById('app').style.display='block';initApp()}document.getElementById('loginPw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()})});
