@@ -91,7 +91,61 @@ tr:hover td{background:#f7fafc}
 .wp button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .wp button:hover:not(.active){background:#f7fafc}
 .footer{padding:24px 32px;text-align:center;color:var(--muted);font-size:11px;border-top:1px solid var(--border);margin-top:24px}
-@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.nav-links button{padding:6px 10px;font-size:12px}}
+/* Weekly Report improved styles */
+.wr-section{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
+.wr-section-header{padding:14px 20px;background:linear-gradient(135deg,#f7fafc,#edf2f7);border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.wr-section-header h4{font-size:14px;font-weight:700;color:var(--navy);margin:0}
+.wr-section-header .wr-toggle{font-size:11px;color:var(--muted);transition:transform 0.2s}
+.wr-section.collapsed .wr-section-body{display:none}
+.wr-section.collapsed .wr-toggle{transform:rotate(-90deg)}
+.wr-section-body{padding:16px 20px}
+.wr-person{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #f0f4f8}
+.wr-person:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.wr-person-name{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.wr-person-name::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px}
+.wr-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
+.wr-table th{background:#f7fafc;padding:8px 10px;text-align:left;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border)}
+.wr-table td{padding:8px 10px;border-bottom:1px solid #f0f4f8;vertical-align:top;line-height:1.6}
+.wr-table tr:hover td{background:#fafbfc}
+.wr-cat{font-weight:600;color:var(--navy);white-space:nowrap;min-width:100px}
+.wr-bullet{color:var(--text);line-height:1.7}
+.wr-bullet li{margin-bottom:3px}
+.wr-company{font-weight:700;color:var(--accent)}
+.wr-pipeline{margin:0 20px 16px}
+.wr-pipeline table{font-size:11px}
+.wr-pipeline th{font-size:10px;padding:6px 8px}
+.wr-pipeline td{padding:6px 8px;font-size:11px}
+.wr-pipeline .approved{color:var(--green);font-weight:600}
+.wr-mgmt{background:#fffaf0;border-left:3px solid var(--yellow);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:12px;font-size:12px;line-height:1.7}
+/* History tab styles */
+.hist-container{padding:24px 32px}
+.hist-header{margin-bottom:24px}
+.hist-header h2{font-size:18px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
+.hist-header p{color:var(--muted);font-size:12px}
+.hist-meeting{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow)}
+.hist-meeting-header{padding:16px 20px;background:linear-gradient(135deg,var(--accent),var(--navy));color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.hist-meeting-header h3{font-size:15px;font-weight:700;margin:0}
+.hist-meeting-header .hist-meta{font-size:11px;opacity:0.8}
+.hist-meeting-body{padding:20px}
+.hist-agenda{margin-bottom:20px}
+.hist-agenda h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--accent-lt)}
+.hist-agenda table{width:100%;font-size:12px;border-collapse:collapse;margin-bottom:8px}
+.hist-agenda th{background:#f7fafc;padding:8px 10px;text-align:left;font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.hist-agenda td{padding:8px 10px;border-bottom:1px solid #f0f4f8;vertical-align:top;line-height:1.6}
+.hist-agenda td:first-child{font-weight:600;white-space:nowrap}
+.hist-action{background:#fff5f5;border-left:3px solid var(--red);padding:6px 12px;border-radius:0 6px 6px 0;font-size:11px;color:#c53030;margin-top:4px}
+.hist-action-yellow{background:#fffaf0;border-left:3px solid var(--yellow);padding:6px 12px;border-radius:0 6px 6px 0;font-size:11px;color:#975a16;margin-top:4px}
+.hist-urgency{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.hist-urgency.red{background:var(--red)}.hist-urgency.yellow{background:var(--yellow)}.hist-urgency.green{background:var(--green)}
+.hist-section{margin-bottom:24px}
+.hist-section>h3{font-size:15px;font-weight:800;letter-spacing:-0.3px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.hist-watchlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.hist-watch-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.hist-watch-card .hw-name{font-weight:700;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.hist-watch-card .hw-issue{font-size:12px;color:var(--muted);line-height:1.5}
+.hist-upload-area{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;background:#fff;margin-bottom:16px;box-shadow:var(--shadow)}
+.hist-upload-area:hover{border-color:var(--accent);background:var(--accent-lt)}
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.nav-links button{padding:6px 10px;font-size:12px}.hist-watchlist{grid-template-columns:1fr}.wr-table{font-size:11px}}
 </style>
 </head>
 <body>
@@ -112,6 +166,7 @@ tr:hover td{background:#f7fafc}
 <div class="nav-links">
 <button class="active" onclick="showPage('portfolio',this)">Portfolio</button>
 <button onclick="showPage('weekly',this)">Weekly Report</button>
+<button onclick="showPage('history',this)">History</button>
 <button onclick="showPage('settings',this)">Settings</button>
 </div>
 </div>
@@ -142,6 +197,20 @@ tr:hover td{background:#f7fafc}
 <div class="weekly-search"><input type="text" id="weeklySearchInput" placeholder="기업명, 키워드, 날짜(예: 2025-03)로 검색..."></div>
 <div class="weekly-timeline" id="weeklyTimeline"></div>
 <div class="wp" id="weeklyPagination"></div>
+</div>
+<div class="page" id="page-history">
+<div class="hist-container">
+<div class="hist-header">
+<h2>SGI History</h2>
+<p>주간회의 핵심 어젠다 & 의사결정 기록</p>
+</div>
+<div class="hist-upload-area" id="histUploadArea" onclick="document.getElementById('histFileInput').click()">
+<strong style="font-size:13px">회의록 추가</strong>
+<span style="color:var(--muted);font-size:12px;margin-left:8px">회의록 PDF를 드래그하거나 클릭 (또는 SGI_History.md 업로드)</span>
+<input type="file" id="histFileInput" accept=".md,.txt" style="display:none">
+</div>
+<div id="historyContent"></div>
+</div>
 </div>
 <div class="page" id="page-settings">
 <div class="upload-section">
@@ -179,9 +248,12 @@ const SK='sgi_pf',WK='sgi_wk';let DATA,WEEKLY=[];
 const SC={'바이오/헬스케어':'#805ad5','제조/산업재':'#c05621','AI/로보틱스':'#0d9488','반도체/전자':'#3182ce','에너지/소재/환경':'#2d7a4f','SW/플랫폼':'#2b6cb0','소비재/F&B':'#c53030','물류/커머스':'#a16207','우주/방산':'#7c3aed','콘텐츠/교육':'#be185d'};
 const SB={'바이오/헬스케어':'bio','제조/산업재':'mfg','AI/로보틱스':'ai','반도체/전자':'semi','에너지/소재/환경':'energy','SW/플랫폼':'sw','소비재/F&B':'consumer','물류/커머스':'logistics','우주/방산':'space','콘텐츠/교육':'content'};
 let charts={};function destroyCharts(){Object.values(charts).forEach(c=>c.destroy());charts={}}
+const HK='sgi_hist';let HISTORY_DATA=[];
 function initApp(){DATA=JSON.parse(localStorage.getItem(SK))||DEFAULT_DATA;const s=localStorage.getItem(WK);if(s)try{WEEKLY=JSON.parse(s)}catch(e){WEEKLY=[]}
 if(typeof WEEKLY_EMBEDDED!=='undefined'&&WEEKLY_EMBEDDED.length){const ed=new Set(WEEKLY.map(w=>w.date));WEEKLY_EMBEDDED.forEach(w=>{if(!ed.has(w.date))WEEKLY.push(w)});WEEKLY.sort((a,b)=>b.date.localeCompare(a.date))}
-renderPortfolio();renderWeekly();setupUpload();setupWeeklyUpload()}
+const hs=localStorage.getItem(HK);if(hs)try{HISTORY_DATA=JSON.parse(hs)}catch(e){HISTORY_DATA=[]}
+if(typeof HISTORY_EMBEDDED!=='undefined'&&HISTORY_EMBEDDED){HISTORY_DATA=HISTORY_EMBEDDED}
+renderPortfolio();renderWeekly();renderHistory();setupUpload();setupWeeklyUpload();setupHistUpload()}
 function renderPortfolio(){destroyCharts();const co=Object.entries(DATA.companies).map(([k,v])=>({key:k,...v})).sort((a,b)=>b.total-a.total);const tot=co.reduce((s,c)=>s+c.total,0),mx=co[0]?.total||1;const ss={};co.forEach(c=>{if(!ss[c.sector])ss[c.sector]={n:0,a:0};ss[c.sector].n++;ss[c.sector].a+=c.total});const sa=Object.entries(ss).sort((a,b)=>b[1].a-a[1].a);const fs={};co.forEach(c=>Object.entries(c.funds).forEach(([f,a])=>{if(!fs[f])fs[f]={n:0,a:0};fs[f].n++;fs[f].a+=a}));const fa=Object.entries(fs).sort((a,b)=>b[1].a-a[1].a);const mf=co.filter(c=>Object.keys(c.funds).length>=2).length;
 document.getElementById('dataDate').textContent='기준일: '+DATA.updated;document.getElementById('currentDate2').textContent=DATA.updated;
 document.getElementById('kpis').innerHTML=`<div class="kpi"><div class="label">투자중 기업수</div><div class="value v1">${co.length}개사</div><div class="sub">${sa.length}개 섹터</div></div><div class="kpi"><div class="label">총 투자잔액</div><div class="value v2">${(tot/100).toLocaleString('ko-KR',{maximumFractionDigits:0})}억원</div><div class="sub">${tot.toLocaleString('ko-KR',{maximumFractionDigits:0})}백만원</div></div><div class="kpi"><div class="label">운용 펀드</div><div class="value v3">${fa.length}개</div><div class="sub">평균 ${(tot/fa.length/100).toFixed(0)}억/펀드</div></div><div class="kpi"><div class="label">다수펀드 투자</div><div class="value v4">${mf}개사</div><div class="sub">2개+ 펀드 중복투자</div></div>`;
@@ -198,13 +270,374 @@ function handleExcel(file){const st=document.getElementById('uploadStatus'),r=ne
 let weeklyPage=0;const PP=10;
 function setupWeeklyUpload(){const a=document.getElementById('weeklyUploadArea'),fi=document.getElementById('weeklyFileInput');a.addEventListener('dragover',e=>{e.preventDefault();a.style.borderColor='var(--accent)'});a.addEventListener('dragleave',()=>{a.style.borderColor=''});a.addEventListener('drop',e=>{e.preventDefault();a.style.borderColor='';handleWD(e.dataTransfer.files)});fi.addEventListener('change',e=>{if(e.target.files.length)handleWD(e.target.files)});let _wt;document.getElementById('weeklySearchInput').addEventListener('input',()=>{clearTimeout(_wt);_wt=setTimeout(()=>{weeklyPage=0;renderWeekly()},300)})}
 function handleWD(files){let n=0;Array.from(files).forEach(file=>{const r=new FileReader();r.onload=function(e){mammoth.extractRawText({arrayBuffer:e.target.result}).then(res=>{const content=res.value,match=file.name.match(/(\d{6})/);let iso='',title='';if(match){const d=match[1],y=2000+parseInt(d.substring(0,2)),m=d.substring(2,4),dd=d.substring(4,6);iso=`${y}-${m}-${dd}`;title=`${match[1]} 주간업무보고`}else{const td=new Date();iso=td.toISOString().split('T')[0];title=file.name.replace('.docx','')}const ex=WEEKLY.findIndex(w=>w.date===iso);if(ex>=0)WEEKLY[ex]={date:iso,title,content};else WEEKLY.push({date:iso,title,content});WEEKLY.sort((a,b)=>b.date.localeCompare(a.date));localStorage.setItem(WK,JSON.stringify(WEEKLY));n++;if(n===files.length){WEEKLY.forEach(w=>{w._lc=(w.date+' '+w.title+' '+(w.content||'')).toLowerCase()});renderWeekly()}})};r.readAsArrayBuffer(file)})}
+function parseWeeklyContent(raw){
+const lines=raw.split('\n');let html='';let sections=[];let curSection=null;let pipelineRows=[];let inPipeline=false;
+const personNames=['권용우','조주연','배인용','김재현','고광범','김준욱','강지영','Tim','경영관리본부'];
+let curPerson=null;let personBlocks=[];let mgmtBlock='';
+for(let i=0;i<lines.length;i++){
+const ln=lines[i].trim();
+if(!ln)continue;
+// Detect pipeline table
+if(ln.includes('기업명')&&ln.includes('IR')&&(ln.includes('투심')||ln.includes('투자'))){inPipeline=true;pipelineRows=[];continue}
+if(inPipeline){
+if(ln.includes('|')){const cells=ln.split('|').map(c=>c.trim()).filter(c=>c);if(cells.length>=3)pipelineRows.push(cells);continue}
+else{inPipeline=false}
+}
+// Detect person sections
+const matchedPerson=personNames.find(p=>ln.includes(p)&&(ln.includes('주간업무보고')||ln.includes('주간 업무 보고')));
+if(matchedPerson){
+if(curPerson){personBlocks.push({name:curPerson,lines:[...curPersonLines]})}
+curPerson=matchedPerson;curPersonLines=[];continue
+}
+// Detect management section
+if(ln.startsWith('●')&&ln.includes('경영관리본부')){
+if(curPerson){personBlocks.push({name:curPerson,lines:[...curPersonLines]})}
+curPerson='경영관리본부';curPersonLines=[];continue
+}
+if(ln.includes('만기도래')||ln.includes('우선주')||ln.includes('전환사채')){
+mgmtBlock+=(mgmtBlock?'\n':'')+ln;continue
+}
+if(curPerson){
+if(typeof curPersonLines==='undefined')curPersonLines=[];
+curPersonLines.push(ln)
+}
+}
+if(curPerson)personBlocks.push({name:curPerson,lines:curPersonLines||[]});
+// Build pipeline HTML
+if(pipelineRows.length){
+html+='<div class="wr-section"><div class="wr-section-header" onclick="this.parentElement.classList.toggle(\'collapsed\')"><h4>투자 파이프라인</h4><span class="wr-toggle">▼</span></div><div class="wr-section-body"><div class="wr-pipeline"><table class="wr-table"><thead><tr><th>기업명</th><th>IR</th><th>예비투심</th><th>본투심</th><th>집행</th><th>비고</th></tr></thead><tbody>';
+pipelineRows.forEach(r=>{
+const row=r.map((c,ci)=>{
+let cls='';
+if(c.includes('승인'))cls=' class="approved"';
+return`<td${cls}>${c}</td>`
+});
+while(row.length<6)row.push('<td></td>');
+html+='<tr>'+row.join('')+'</tr>'
+});
+html+='</tbody></table></div></div></div>'
+}
+// Build management notice
+if(mgmtBlock){
+html+='<div class="wr-mgmt"><strong>경영관리</strong><br>'+mgmtBlock.replace(/\n/g,'<br>')+'</div>'
+}
+// Build person sections
+const investPeople=personBlocks.filter(p=>p.name!=='경영관리본부');
+const mgmtPeople=personBlocks.filter(p=>p.name==='경영관리본부');
+if(investPeople.length){
+html+='<div class="wr-section"><div class="wr-section-header" onclick="this.parentElement.classList.toggle(\'collapsed\')"><h4>심사역 주간업무</h4><span class="wr-toggle">▼</span></div><div class="wr-section-body">';
+investPeople.forEach(pb=>{
+html+='<div class="wr-person"><div class="wr-person-name">'+pb.name+'</div>';
+html+=formatPersonContent(pb.lines);
+html+='</div>'
+});
+html+='</div></div>'
+}
+if(mgmtPeople.length){
+html+='<div class="wr-section"><div class="wr-section-header" onclick="this.parentElement.classList.toggle(\'collapsed\')"><h4>경영관리본부</h4><span class="wr-toggle">▼</span></div><div class="wr-section-body">';
+html+=formatPersonContent(mgmtPeople[0].lines);
+html+='</div></div>'
+}
+if(!html)html='<div class="wr-section"><div class="wr-section-body" style="white-space:pre-wrap;font-size:13px;line-height:1.8">'+raw.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div></div>';
+return html
+}
+function formatPersonContent(lines){
+let html='';let tableData=[];let inTable=false;
+for(let i=0;i<lines.length;i++){
+const ln=lines[i];
+if(ln.includes('|')&&ln.split('|').length>=3){
+const cells=ln.split('|').map(c=>c.trim()).filter(c=>c);
+if(!inTable&&(ln.includes('구분')||ln.includes('전주')||ln.includes('금주'))){
+inTable=true;tableData=[cells];continue
+}
+if(inTable){tableData.push(cells);continue}
+}else if(inTable&&tableData.length){
+html+=renderReportTable(tableData);tableData=[];inTable=false
+}
+if(!inTable){
+const clean=ln.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+if(ln.match(/^\d+\./)||ln.match(/^[①②③④⑤⑥⑦⑧⑨⑩]/)){
+html+='<div style="margin:8px 0 4px;font-weight:600;color:var(--navy);font-size:12px">'+clean+'</div>'
+}else if(ln.startsWith('-')||ln.startsWith('→')){
+html+='<div style="padding-left:12px;font-size:12px;line-height:1.7;color:var(--text)">'+clean+'</div>'
+}else{
+html+='<div style="font-size:12px;line-height:1.7">'+clean+'</div>'
+}
+}
+}
+if(inTable&&tableData.length)html+=renderReportTable(tableData);
+return html
+}
+function renderReportTable(data){
+if(!data.length)return'';
+let h='<table class="wr-table"><thead><tr>';
+data[0].forEach(c=>h+='<th>'+c+'</th>');
+h+='</tr></thead><tbody>';
+for(let i=1;i<data.length;i++){
+h+='<tr>';
+data[i].forEach((c,ci)=>{
+const cls=ci===0?' class="wr-cat"':'';
+const formatted=c.replace(/\n/g,'<br>').replace(/([가-힣a-zA-Z]+)\s*[\(（]/g,'<span class="wr-company">$1</span>(');
+h+=`<td${cls}>${formatted}</td>`
+});
+h+='</tr>'
+}
+h+='</tbody></table>';
+return h
+}
 function renderWeekly(){const q=(document.getElementById('weeklySearchInput')?.value||'').toLowerCase().trim();let fl=WEEKLY;if(q){const terms=q.split(/\s+/).filter(t=>t.length>0);fl=WEEKLY.filter(w=>{const hay=(w.date+' '+w.title+' '+(w.content||'')).toLowerCase();return terms.every(t=>hay.includes(t))})};document.getElementById('weeklyCount').textContent=`총 ${WEEKLY.length}건${q?' (검색: '+fl.length+'건)':''}`;const tp=Math.ceil(fl.length/PP),pg=fl.slice(weeklyPage*PP,(weeklyPage+1)*PP);const tl=document.getElementById('weeklyTimeline');if(!fl.length){tl.innerHTML='<div class="weekly-empty">데이터 없음</div>';document.getElementById('weeklyPagination').innerHTML='';return}
-tl.innerHTML=pg.map(w=>{const d=new Date(w.date),ds=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;const pv=(w.content||'').substring(0,150).replace(/\n/g,' ');const ec=(w.content||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return`<div class="week-card" onclick="this.classList.toggle('expanded')"><div class="week-date">${ds}<span>${w.title}</span></div><div class="week-preview">${pv}...</div><div class="week-detail"><div class="week-detail-content">${ec}</div></div></div>`}).join('');
+tl.innerHTML=pg.map(w=>{const d=new Date(w.date),ds=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;const pv=(w.content||'').substring(0,150).replace(/\n/g,' ');const parsed=parseWeeklyContent(w.content||'');return`<div class="week-card" onclick="this.classList.toggle('expanded')"><div class="week-date">${ds}<span>${w.title}</span></div><div class="week-preview">${pv}...</div><div class="week-detail">${parsed}</div></div>`}).join('');
 const p=document.getElementById('weeklyPagination');if(tp<=1){p.innerHTML='';return}let h='';for(let i=0;i<tp;i++)h+=`<button class="${i===weeklyPage?'active':''}" onclick="weeklyPage=${i};renderWeekly()">${i+1}</button>`;p.innerHTML=h}
 function downloadCurrentData(){const b=new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`sgi_portfolio_${DATA.updated.replace(/\./g,'')}.json`;a.click()}
 function downloadWeeklyData(){const b=new Blob([JSON.stringify(WEEKLY,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sgi_weekly.json';a.click()}
+function setupHistUpload(){
+const a=document.getElementById('histUploadArea'),fi=document.getElementById('histFileInput');
+a.addEventListener('dragover',e=>{e.preventDefault();a.style.borderColor='var(--accent)'});
+a.addEventListener('dragleave',()=>{a.style.borderColor=''});
+a.addEventListener('drop',e=>{e.preventDefault();a.style.borderColor='';if(e.dataTransfer.files[0])handleHistFile(e.dataTransfer.files[0])});
+fi.addEventListener('change',e=>{if(e.target.files[0])handleHistFile(e.target.files[0])})
+}
+function handleHistFile(file){
+const r=new FileReader();
+r.onload=function(e){
+const text=e.target.result;
+HISTORY_DATA=parseHistoryMd(text);
+localStorage.setItem(HK,JSON.stringify(HISTORY_DATA));
+renderHistory()
+};
+r.readAsText(file,'utf-8')
+}
+function parseHistoryMd(md){
+const result={meetings:[],pipeline:{active:[],recent_ir:[],recent_exec:[]},watchlist:[],maturity:{preferred:[],convertible:[]},raw:md};
+const lines=md.split('\n');let i=0;
+let curMeeting=null;let curAgendaTitle='';let curAgendaRows=[];let inTable=false;let tableHeaders=[];
+while(i<lines.length){
+const ln=lines[i].trim();
+// Meeting header: ### 2026.03.10 주간회의
+if(ln.match(/^###\s+\d{4}\.\d{2}\.\d{2}\s+주간회의/)){
+if(curMeeting)result.meetings.push(curMeeting);
+const dateMatch=ln.match(/(\d{4}\.\d{2}\.\d{2})/);
+curMeeting={date:dateMatch?dateMatch[1]:'',participants:'',agendas:[],extras:[]};
+i++;continue
+}
+// Participants
+if(curMeeting&&ln.startsWith('**참석**')){
+curMeeting.participants=ln.replace('**참석**:','').replace('**참석**：','').trim();
+i++;continue
+}
+// Agenda section: #### 1. 투자 심의
+if(curMeeting&&ln.match(/^####\s+\d+\./)){
+if(curAgendaTitle&&curAgendaRows.length){
+curMeeting.agendas.push({title:curAgendaTitle,rows:curAgendaRows,extras:[]})
+}
+curAgendaTitle=ln.replace(/^#+\s*/,'');curAgendaRows=[];inTable=false;
+i++;continue
+}
+// Table detection
+if(curMeeting&&ln.startsWith('|')&&ln.includes('|')){
+const cells=ln.split('|').map(c=>c.trim()).filter(c=>c);
+if(ln.includes('---')){i++;continue}
+if(!inTable){tableHeaders=cells;inTable=true;i++;continue}
+if(inTable){
+const row={};
+cells.forEach((c,ci)=>{if(ci<tableHeaders.length)row[tableHeaders[ci]]=c});
+curAgendaRows.push(row);
+i++;continue
+}
+}else{inTable=false}
+// Extra content under agenda
+if(curMeeting&&curAgendaTitle&&ln.startsWith('**')&&!ln.match(/^####/)){
+const extraLine=ln;
+if(curMeeting.agendas.length||curAgendaRows.length){
+if(!curAgendaRows._extras)curAgendaRows._extras=[];
+}
+}
+// Watchlist
+if(ln.includes('사후관리 워치리스트')){
+i++;
+while(i<lines.length){
+const wl=lines[i].trim();
+if(wl.startsWith('##'))break;
+if(wl.startsWith('|')&&!wl.includes('---')&&!wl.includes('기업명')){
+const cells=wl.split('|').map(c=>c.trim()).filter(c=>c);
+if(cells.length>=3){
+result.watchlist.push({name:cells[0].replace(/\*\*/g,''),issue:cells[1],urgency:cells[2]})
+}
+}
+i++
+}
+continue
+}
+// Pipeline tables
+if(ln.includes('진행중 (예비투심')){
+i++;
+while(i<lines.length){
+const pl=lines[i].trim();
+if(pl.startsWith('###')||pl.startsWith('##'))break;
+if(pl.startsWith('|')&&!pl.includes('---')&&!pl.includes('기업명')){
+const cells=pl.split('|').map(c=>c.trim()).filter(c=>c);
+if(cells.length>=5)result.pipeline.active.push(cells)
+}
+i++
+}
+continue
+}
+if(ln.includes('최근 IR 접수')){
+i++;
+while(i<lines.length){
+const pl=lines[i].trim();
+if(pl.startsWith('###')||pl.startsWith('##'))break;
+if(pl.startsWith('|')&&!pl.includes('---')&&!pl.includes('기업명')){
+const cells=pl.split('|').map(c=>c.trim()).filter(c=>c);
+if(cells.length>=2)result.pipeline.recent_ir.push(cells)
+}
+i++
+}
+continue
+}
+if(ln.includes('최근 투자 집행')){
+i++;
+while(i<lines.length){
+const pl=lines[i].trim();
+if(pl.startsWith('###')||pl.startsWith('##'))break;
+if(pl.startsWith('|')&&!pl.includes('---')&&!pl.includes('기업명')){
+const cells=pl.split('|').map(c=>c.trim()).filter(c=>c);
+if(cells.length>=3)result.pipeline.recent_exec.push(cells)
+}
+i++
+}
+continue
+}
+// Maturity
+if(ln.includes('만기 도래 업체')){
+i++;let section='';
+while(i<lines.length){
+const ml=lines[i].trim();
+if(ml.startsWith('##')&&!ml.startsWith('###'))break;
+if(ml.includes('우선주'))section='pref';
+if(ml.includes('전환사채'))section='conv';
+if(ml.startsWith('|')&&!ml.includes('---')&&!ml.includes('기업명')&&!ml.includes('금액')){
+const cells=ml.split('|').map(c=>c.trim()).filter(c=>c);
+if(section==='pref'&&cells.length>=2)result.maturity.preferred.push(cells);
+if(section==='conv'&&cells.length>=3)result.maturity.convertible.push(cells);
+}
+i++
+}
+continue
+}
+i++
+}
+if(curMeeting){
+if(curAgendaTitle&&curAgendaRows.length)curMeeting.agendas.push({title:curAgendaTitle,rows:curAgendaRows});
+result.meetings.push(curMeeting)
+}
+return result
+}
+function renderHistory(){
+const el=document.getElementById('historyContent');
+if(!HISTORY_DATA||(!HISTORY_DATA.meetings&&!HISTORY_DATA.raw)){
+el.innerHTML='<div class="weekly-empty">SGI_History.md 파일을 업로드하세요</div>';return
+}
+const d=HISTORY_DATA;let html='';
+// Meetings
+if(d.meetings&&d.meetings.length){
+html+='<div class="hist-section"><h3>주간회의 어젠다 로그</h3>';
+d.meetings.forEach(m=>{
+html+=`<div class="hist-meeting"><div class="hist-meeting-header" onclick="this.parentElement.querySelector('.hist-meeting-body').style.display=this.parentElement.querySelector('.hist-meeting-body').style.display==='none'?'block':'none'"><h3>${m.date} 주간회의</h3><span class="hist-meta">${m.participants?m.participants.substring(0,50)+'...':''}</span></div><div class="hist-meeting-body">`;
+if(m.participants)html+=`<div style="font-size:11px;color:var(--muted);margin-bottom:16px"><strong>참석:</strong> ${m.participants}</div>`;
+m.agendas.forEach(ag=>{
+html+=`<div class="hist-agenda"><h4>${ag.title}</h4>`;
+if(ag.rows.length){
+const keys=Object.keys(ag.rows[0]);
+html+='<table><thead><tr>';
+keys.forEach(k=>html+=`<th>${k.replace(/\*\*/g,'')}</th>`);
+html+='</tr></thead><tbody>';
+ag.rows.forEach(row=>{
+html+='<tr>';
+keys.forEach(k=>{
+let v=(row[k]||'').replace(/\*\*/g,'');
+// Highlight action items
+if(k.includes('조치')&&v&&v!=='-'){
+v=`<div class="hist-action">${v}</div>`
+}
+html+=`<td>${v}</td>`
+});
+html+='</tr>'
+});
+html+='</tbody></table>'
+}
+html+='</div>'
+});
+html+='</div></div>'
+});
+html+='</div>'
+}
+// Watchlist
+if(d.watchlist&&d.watchlist.length){
+html+='<div class="hist-section"><h3>사후관리 워치리스트</h3><div class="hist-watchlist">';
+d.watchlist.forEach(w=>{
+const urgColor=w.urgency.includes('🔴')?'red':w.urgency.includes('🟡')?'yellow':'green';
+html+=`<div class="hist-watch-card"><div class="hw-name"><span class="hist-urgency ${urgColor}"></span>${w.name}</div><div class="hw-issue">${w.issue}</div></div>`
+});
+html+='</div></div>'
+}
+// Pipeline
+if(d.pipeline&&(d.pipeline.active.length||d.pipeline.recent_ir.length)){
+html+='<div class="hist-section"><h3>투자 파이프라인</h3>';
+if(d.pipeline.active.length){
+html+='<div class="card" style="margin-bottom:12px"><h3>진행중 (예비투심 이후)</h3><div class="table-scroll"><table class="wr-table"><thead><tr><th>기업명</th><th>IR</th><th>예비투심</th><th>본투심</th><th>집행</th><th>비고</th></tr></thead><tbody>';
+d.pipeline.active.forEach(r=>{
+html+='<tr>';
+r.forEach((c,ci)=>{
+let cls=c.includes('승인')?' class="approved"':'';
+html+=`<td${cls}>${c}</td>`
+});
+while(r.length<6)html+='<td></td>';
+html+='</tr>'
+});
+html+='</tbody></table></div></div>'
+}
+if(d.pipeline.recent_ir.length){
+html+='<div class="card" style="margin-bottom:12px"><h3>최근 IR 접수</h3><div class="table-scroll"><table class="wr-table"><thead><tr><th>기업명</th><th>IR일</th><th>비고</th></tr></thead><tbody>';
+d.pipeline.recent_ir.forEach(r=>{
+html+='<tr>';r.forEach(c=>html+=`<td>${c}</td>`);
+while(r.length<3)html+='<td></td>';
+html+='</tr>'
+});
+html+='</tbody></table></div></div>'
+}
+if(d.pipeline.recent_exec.length){
+html+='<div class="card" style="margin-bottom:12px"><h3>최근 투자 집행</h3><div class="table-scroll"><table class="wr-table"><thead><tr><th>기업명</th><th>집행일</th><th>펀드</th><th>비고</th></tr></thead><tbody>';
+d.pipeline.recent_exec.forEach(r=>{
+html+='<tr>';r.forEach(c=>html+=`<td>${c}</td>`);
+while(r.length<4)html+='<td></td>';
+html+='</tr>'
+});
+html+='</tbody></table></div></div>'
+}
+html+='</div>'
+}
+// Maturity
+if(d.maturity&&(d.maturity.preferred.length||d.maturity.convertible.length)){
+html+='<div class="hist-section"><h3>만기 도래 업체</h3>';
+if(d.maturity.preferred.length){
+html+='<div class="card" style="margin-bottom:12px"><h3>우선주</h3><table class="wr-table"><thead><tr><th>기업명</th><th>만기</th><th>존속기간</th></tr></thead><tbody>';
+d.maturity.preferred.forEach(r=>{html+='<tr>';r.forEach(c=>html+=`<td>${c}</td>`);html+='</tr>'});
+html+='</tbody></table></div>'
+}
+if(d.maturity.convertible.length){
+html+='<div class="card" style="margin-bottom:12px"><h3>전환사채</h3><table class="wr-table"><thead><tr><th>기업명</th><th>금액</th><th>만기</th><th>존속</th><th>펀드</th></tr></thead><tbody>';
+d.maturity.convertible.forEach(r=>{html+='<tr>';r.forEach(c=>html+=`<td>${c}</td>`);html+='</tr>'});
+html+='</tbody></table></div>'
+}
+html+='</div>'
+}
+el.innerHTML=html
+}
 </script>
 <script>const DEFAULT_DATA={"updated": "2026.01.30", "companies": {"파인트리": {"name": "㈜파인트리", "total": 13948.86886692, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 1387.5111000000002, "SGI세컨더리 2호(84억)": 1387.5111000000002, "그린뉴딜 펀드 (300억)": 1217.718782, "초격차펀드 (408억)": 2036.018213, "AIM세컨더리 (550억)": 2362.138557, "딥테크 25-2 (77억)": 5557.971114919999}, "note": "EGFR, NRP1 타겟 이중항체등 신약개발"}, "국일도어테크": {"name": "국일도어테크㈜", "total": 9999.72, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 9999.72}, "note": "방화문, 도어 하드웨어 제조(i-b)"}, "코멤텍": {"name": "㈜코멤텍", "total": 6500.231714, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.06, "GS칼텍스 케미칼펀드(157.5억)": 3000.156192, "Hydrogen Tech조합(63.5억)": 3000.0155219999997}, "note": "PTFE 멤브레인 제조"}, "관악아날로그": {"name": "관악아날로그㈜", "total": 6500.0826, "sector": "반도체/전자", "funds": {"초격차펀드 (408억)": 999.933, "SGI-KD 초격차반도체(58억)": 5500.1496}, "note": "아나로그반도체 펩리스"}, "아이트로닉스": {"name": "㈜아이트로닉스", "total": 5455.9616000000005, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 5455.9616000000005}, "note": "미수금 20억"}, "클라리파이": {"name": "㈜클라리파이", "total": 5100.005666, "sector": "AI/로보틱스", "funds": {"신성장 메짜닌펀드 (80억)": 1500.004993, "딥테크 25-2 (77억)": 1600.002584, "SGI-IBKC  딥테크 조합 (500억)": 1999.998089}, "note": "의료 AI 솔루션"}, "비츠로시스": {"name": "㈜비츠로시스", "total": 5000.0, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 5000.0}, "note": "일반상환청구후 회사의 만기전취득(매매)"}, "스킨앤스킨": {"name": "㈜스킨앤스킨", "total": 4999.99991, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 4999.99991}, "note": "1,000만주 블럭딜"}, "썬테크": {"name": "㈜썬테크", "total": 4100.01465, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 2100.00725, "SGI세컨더리 2호(84억)": 2000.0074}, "note": "영구자석 발전기 제조 (@5,405.425)"}, "퓨리켐": {"name": "㈜퓨리켐", "total": 3716.628804, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1216.632, "퍼스트펭귄 스타트업펀드 (390억)": 1000.0, "그린뉴딜 펀드 (300억)": 1499.996804}, "note": "커페시터 EDLC 등 제조(18년감사:50%감액)"}, "씨알푸드": {"name": "㈜씨알푸드", "total": 3142.0, "sector": "소비재/F&B", "funds": {"SGI세컨더리 2호(84억)": 3142.0}, "note": "씨리얼 제조(원금 20억)"}, "코너스": {"name": "㈜코너스", "total": 3081.0, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 3081.0}, "note": "스마트 안전 에이전스 솔류션/휴먼씨 인수"}, "엔도로보틱스": {"name": "㈜엔도로보틱스", "total": 3040.968, "sector": "AI/로보틱스", "funds": {"AIM세컨더리 (550억)": 3040.968}, "note": "내시경 수술용 로봇 시스템"}, "브이에스아이": {"name": "㈜브이에스아이", "total": 3000.001905, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.0, "그린뉴딜 펀드 (300억)": 2000.001905}, "note": "제전기,CNT paste제조"}, "엑시아머티리얼스": {"name": "㈜엑시아머티리얼스", "total": 3000.0, "sector": "에너지/소재/환경", "funds": {"KoFC펀드 (335억)": 3000.0}, "note": "자본잠식&해산결의로 감액 (22.06.30)"}, "파두": {"name": "㈜파두", "total": 2999.9101579999992, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.9999999999998, "유니콘스타트업(300억)": 999.910158}, "note": "22.06.29 전환청구, 단주 입금"}, "노벨티노빌리티": {"name": "㈜노벨티노빌리티", "total": 2800.100841, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 1000.04229, "그린뉴딜 펀드 (300억)": 1000.04229, "AIM세컨더리 (550억)": 800.0162610000001}, "note": "c-Kit항제 및 ADC개발,24.12.20 전환청구"}, "피크바이오,PH파마": {"name": "㈜피크바이오,PH파마", "total": 2663.766, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1775.844, "유니콘스타트업(300억)": 887.922}, "note": "2025.10.17 나스닥 장내매도로 일부 회수"}, "베스텔라랩": {"name": "㈜베스텔라랩", "total": 2500.007516, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1000.006, "초격차펀드 (408억)": 1500.001516}, "note": "자율주차 플랫폼 구축"}, "씨앤큐어": {"name": "㈜씨앤큐어", "total": 2500.00695, "sector": "제조/산업재", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 2500.00695}, "note": "미생물 기반 항암치료제"}, "바이오코프": {"name": "바이오코프㈜", "total": 2500.002, "sector": "바이오/헬스케어", "funds": {"전남그린 펀드 (76억)": 1000.002, "GS칼텍스 케미칼펀드(157.5억)": 1500.0}, "note": "크릴오일 생산(舊:바이올시스템즈)"}, "커피베이": {"name": "㈜커피베이", "total": 2499.993034, "sector": "소비재/F&B", "funds": {"돌핀M&A조합(505.3억)": 2499.993034}, "note": "커피 프랜차이즈"}, "씨너지": {"name": "㈜씨너지", "total": 2499.978694, "sector": "AI/로보틱스", "funds": {"초격차펀드 (408억)": 1999.5767919999998, "AIM세컨더리 (550억)": 500.401902}, "note": "탄소배출권 거래 AI SaaS 플랫폼"}, "HMR": {"name": "㈜HMR", "total": 2499.96, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 500.0, "KoFC펀드 (335억)": 1999.96}, "note": "고순도 알루미나 제조"}, "에스바이오메딕스": {"name": "㈜에스바이오메딕스", "total": 2178.95667, "sector": "바이오/헬스케어", "funds": {"펀드출자 3펀드": 2178.95667}, "note": "코스닥상장후 장내매각(23.6.5/24.3.26)"}, "에이앤피테크": {"name": "㈜에이앤피테크", "total": 2100.004, "sector": "반도체/전자", "funds": {"KoFC펀드 (335억)": 2100.004}, "note": "LED 도광판 제조외"}, "시지트로닉스": {"name": "㈜시지트로닉스", "total": 2002.688, "sector": "반도체/전자", "funds": {"유니콘스타트업(300억)": 1001.344, "그린뉴딜 펀드 (300억)": 1001.344}, "note": "차량용,통신용 반도체 소자(Si,GaN)"}, "바이오닉스": {"name": "㈜바이오닉스", "total": 2000.29848, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 2000.29848}, "note": "원금 100% 조기상환(24.6.20/6.28)"}, "바오밥에이바이오": {"name": "바오밥에이바이오", "total": 2000.25, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.25}, "note": "Cryo EM 활용 신약개발"}, "히에라바이오": {"name": "㈜히에라바이오", "total": 2000.1408000000001, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 1000.0704000000001, "그린뉴딜 펀드 (300억)": 1000.0704000000001}, "note": "줄기세포치료제 개발"}, "아이엠비디엑스": {"name": "㈜아이엠비디엑스", "total": 2000.1185600000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.1185600000001}, "note": "액체생검(암진단)"}, "코아시아넥셀양/최성지)": {"name": "㈜코아시아넥셀 양/최성지)", "total": 2000.075132, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.075132}, "note": "2025.12.31 전액손상"}, "메디퓨처스": {"name": "메디퓨처스㈜", "total": 2000.04576, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.02288, "유니콘스타트업(300억)": 1000.02288}, "note": "초음파 의료용봉합사 제조"}, "프리시스": {"name": "프리시스㈜", "total": 2000.035, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.035}, "note": "(매각처리: 2018.08.17)"}, "HKMnS": {"name": "HK MnS㈜", "total": 2000.0349999999999, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.0349999999999}, "note": "(회수:2014.12.26)(회수:2015.12.28)"}, "디에스앤텍": {"name": "㈜디에스앤텍", "total": 2000.0125, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 500.0125, "KoFC펀드 (335억)": 1500.0}, "note": "(상환완료23.11.03-매각으로 종결)"}, "솔리비스": {"name": "㈜솔리비스", "total": 2000.01208, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1000.04368, "초격차펀드 (408억)": 999.9684}, "note": "고체 전해질 개발"}, "옵토레인": {"name": "㈜옵토레인", "total": 2000.010302, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.010302}, "note": "반도체기반의 Real time PCR 칩/리더기개발"}, "아이엠티": {"name": "㈜아이엠티", "total": 2000.00337, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.00337}, "note": "23.7.25구주매각(40만주/YG,하랑),10월 장내매도"}, "이뮤니스바이오": {"name": "㈜이뮤니스바이오", "total": 2000.00035, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.00035}, "note": "NK 면역세포치료제 개발"}, "나눔에너지": {"name": "나눔에너지㈜", "total": 2000.0, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 2000.0}, "note": "(회수완료: 2010.07.14)"}, "위엠비": {"name": "㈜위엠비", "total": 2000.0, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.0}, "note": "통합관제솔루션"}, "켐토피아": {"name": "㈜켐토피아", "total": 2000.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 2000.0}, "note": "스마트 환경,안전관리 플랫폼"}, "메를로랩": {"name": "㈜메를로랩", "total": 1999.9995, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1999.9995}, "note": "메쉬 네트워크 기반 전력관리시스템"}, "알파플러스": {"name": "㈜알파플러스", "total": 1999.9985, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1999.9985}, "note": "(회수완료:2016.06.30 제3자매각)"}, "파트론ESL": {"name": "㈜파트론ESL", "total": 1999.99783, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.99783}, "note": "전자가격표시기 제조"}, "소바젠": {"name": "㈜소바젠", "total": 1999.985928, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1999.985928}, "note": "뇌전증치료제 개발"}, "지브레인": {"name": "㈜지브레인", "total": 1999.9847, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 999.9765, "초격차펀드 (408억)": 1000.0082}, "note": "뇌전증 진단, 치료 의료기기 개발"}, "크라우드웍스": {"name": "㈜크라우드웍스", "total": 1999.982, "sector": "AI/로보틱스", "funds": {"돌핀M&A조합(505.3억)": 1999.982}, "note": "장내매각"}, "셀비온": {"name": "㈜셀비온", "total": 1999.97775, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.97775}, "note": "24.10.16,17 코스닥장내매도"}, "휴민로보틱스": {"name": "㈜휴민로보틱스", "total": 1999.976472, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1999.976472}, "note": "이차전지,OLED 자동화 장비"}, "엘케이켐": {"name": "㈜엘케이켐", "total": 1999.965, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1999.965}, "note": "IPO 장내매각(25.02.25~27)"}, "액트테라퓨틱스": {"name": "액트테라퓨틱스㈜", "total": 1999.812254, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 999.906127, "그린뉴딜 펀드 (300억)": 999.906127}, "note": "CAR-T 치료제 개발/24.9.30 전액감액"}, "우나스텔라": {"name": "㈜우나스텔라", "total": 1999.802, "sector": "우주/방산", "funds": {"초격차펀드 (408억)": 1999.802}, "note": "저궤도용 우주발사체"}, "트리즈커머스": {"name": "㈜트리즈커머스", "total": 1996.8, "sector": "물류/커머스", "funds": {"돌핀M&A조합(505.3억)": 1996.8}, "note": "전자상거래업,인플루언서 매니징/커머스"}, "Cytovant": {"name": "Cytovant", "total": 1879.499817, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1879.499817}, "note": "TCR-T 등 항암제, 23년말 80%감액"}, "큐젠바이오텍": {"name": "㈜큐젠바이오텍", "total": 1831.5, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1831.5}, "note": "베타글루칸(화장품재료,하이드로겔 등)\n회생신청으로 전액 감액(21.09.30)\n회생계획승인 54.5% 988"}, "호전에이블": {"name": "㈜호전에이블", "total": 1791.315, "sector": "반도체/전자", "funds": {"AIM세컨더리 (550억)": 1791.315}, "note": "반도체 패키징 접합소재"}, "에어스메디칼": {"name": "㈜에어스메디칼", "total": 1515.373308, "sector": "바이오/헬스케어", "funds": {"초격차펀드 (408억)": 1515.373308}, "note": "의료 AI 솔루션"}, "브이에스팜텍": {"name": "㈜브이에스팜텍", "total": 1500.2819, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 750.14095, "그린뉴딜 펀드 (300억)": 750.14095}, "note": "방사선 민감제 개발"}, "블루타일랩": {"name": "㈜블루타일랩", "total": 1500.02619, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1500.02619}, "note": "AI기반 비전검사,펨토초레이저 소스"}, "케이웨더": {"name": "케이웨더㈜", "total": 1500.009, "sector": "물류/커머스", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1500.009}, "note": "24.2.11/3.22/5.22 장내매각"}, "에코세이브": {"name": "에코세이브㈜", "total": 1500.0, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 1500.0}, "note": "자원재활용 자동화 설비 제조 외"}, "바칠라캐빈": {"name": "바칠라캐빈㈜", "total": 1500.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1500.0}, "note": "선박용 Unit Cabin 제조 외"}, "박셀바이오": {"name": "㈜박셀바이오", "total": 1500.0, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 1500.0}, "note": "코스닥 상장 장내매각(20.12.28)"}, "다임바이오": {"name": "다임바이오㈜", "total": 1499.991328, "sector": "바이오/헬스케어", "funds": {"초격차펀드 (408억)": 1499.991328}, "note": "항암제,퇴행성뇌질환치료제 개발"}, "써머스플랫폼": {"name": "㈜써머스플랫폼", "total": 1412.0313130000002, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 1412.0313130000002}, "note": "모회사와 포괄적주식교환시 주식매수청구권 행사"}, "가제트코리아": {"name": "㈜가제트코리아", "total": 1358.744925, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1358.744925}, "note": "e-SIM 데이터로밍 서비스"}, "로앤컴퍼니": {"name": "㈜로앤컴퍼니", "total": 1348.321273, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1348.321273}, "note": "법률검색 플랫폼"}, "덴티움": {"name": "㈜덴티움", "total": 1300.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 1300.0}, "note": "(회수완료: 2011.10.18)"}, "클레어픽셀": {"name": "㈜클레어픽셀", "total": 1135.00375, "sector": "바이오/헬스케어", "funds": {"KoFC펀드 (335억)": 1135.00375}, "note": "2023.12.31 90% 감액"}, "테크트랜스": {"name": "테크트랜스", "total": 1050.0039, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1050.0039}, "note": "보통주전환시 단주입금"}, "비에스지머티리얼즈": {"name": "㈜비에스지머티리얼즈", "total": 1005.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1005.0}, "note": "2차전지 음극재용 실리콘 복합소재"}, "웨이센": {"name": "㈜웨이센", "total": 1003.0020000000001, "sector": "AI/로보틱스", "funds": {"유니콘스타트업(300억)": 1003.0020000000001}, "note": "위내시경 진단보조 AI 소프트웨어 개발"}, "심플플래닛": {"name": "㈜심플플래닛", "total": 1000.9798000000001, "sector": "소비재/F&B", "funds": {"초격차펀드 (408억)": 1000.9798000000001}, "note": "세포배양식품 및 기능성원료"}, "뷰런테크놀로지": {"name": "㈜뷰런테크놀로지", "total": 1000.9656, "sector": "AI/로보틱스", "funds": {"초격차펀드 (408억)": 1000.9656}, "note": "자율주행 라이다 솔루션"}, "비엔에스알": {"name": "㈜비엔에스알", "total": 1000.2, "sector": "반도체/전자", "funds": {"SGI-IBKC  딥테크 조합 (500억)": 1000.2}, "note": "반도체 공정 진단장비"}, "트레드링스": {"name": "㈜트레드링스", "total": 1000.1824799999999, "sector": "물류/커머스", "funds": {"그린뉴딜 펀드 (300억)": 1000.1824799999999}, "note": "스마트물류 플랫폼, 25년말 손상환입"}, "BMT": {"name": "㈜BMT", "total": 1000.1458, "sector": "제조/산업재", "funds": {"유니콘스타트업(300억)": 1000.1458}, "note": "24.12.31 자본잠식으로 100% 감액"}, "라미나": {"name": "㈜라미나", "total": 1000.125, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.125}, "note": "2023.12.31 90% 감액"}, "엔비스아나": {"name": "엔비스아나㈜", "total": 1000.105, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.105}, "note": "(3자매각 회수완료,2021.12.14)"}, "에스유엠": {"name": "㈜에스유엠", "total": 1000.098, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1000.098}, "note": "자율주행 솔루션 개발"}, "미림진": {"name": "㈜미림진", "total": 1000.0733399999999, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0733399999999}, "note": "자가면역질환 치료제"}, "숨비": {"name": "㈜숨비", "total": 1000.008, "sector": "우주/방산", "funds": {"AIM세컨더리 (550억)": 1000.008}, "note": "산업용, 국방용 드론제조"}, "이엔테크놀로지": {"name": "이엔테크놀로지㈜", "total": 1000.0035, "sector": "반도체/전자", "funds": {"KoFC펀드 (335억)": 1000.0035}, "note": "전력공급장치 제조(2020.12.31 회생으로 감액)"}, "오스틴제약": {"name": "㈜오스틴제약", "total": 1000.0025, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 1000.0025}, "note": "24.07.12 풋옵션행사 입금완료(BS)"}, "GN1": {"name": "㈜GN1", "total": 1000.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.0}, "note": "자동차 부품 제조(회생신청 17.3.31감액)"}, "왓챠": {"name": "㈜왓챠", "total": 1000.0, "sector": "콘텐츠/교육", "funds": {"신성장 메짜닌펀드 (80억)": 1000.0}, "note": "2025.06.30 전액감액(잠식,의견거절,회생신청)"}, "단비교육": {"name": "㈜단비교육", "total": 1000.0, "sector": "콘텐츠/교육", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.0}, "note": "유초등 인터넷 가정학습 서비스"}, "셀레믹스": {"name": "㈜셀레믹스", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.0}, "note": "NGS기반 유전자분석 및 키트 개발"}, "코멕스카본": {"name": "㈜코멕스카본", "total": 1000.0, "sector": "에너지/소재/환경", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "OLED용 흑연제품(도가니)"}, "펠레메드": {"name": "㈜펠레메드", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "폐암치료제 신약 개발(NRDO)"}, "노바셀테크놀로지": {"name": "노바셀테크놀로지", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "아토피 등 펩타이드 면역치료제 개발"}, "에어포인트": {"name": "㈜에어포인트", "total": 1000.0, "sector": "반도체/전자", "funds": {"그린뉴딜 펀드 (300억)": 1000.0}, "note": "하이패스 ETC칩, 무선 BMS제조"}, "신성미네랄": {"name": "㈜신성미네랄", "total": 1000.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1000.0}, "note": "23.7.31/23.12.31/24.7.1/25.1.2/25.4.30 분할상환"}, "한국해양기술": {"name": "한국해양기술㈜", "total": 1000.0, "sector": "제조/산업재", "funds": {"초격차펀드 (408억)": 1000.0}, "note": "해저캐이블공사,25.12.31 손상"}, "마이크로엑츄에이터": {"name": "마이크로엑츄에이터", "total": 999.999, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 999.999}, "note": "풋옵션 행사후 매매계약 체결하고 잔금 24.09.30수령 매도완료"}, "베지스타": {"name": "㈜베지스타", "total": 999.9909, "sector": "소비재/F&B", "funds": {"그린뉴딜 펀드 (300억)": 999.9909}, "note": "신선식품 가공업"}, "마스터메디텍": {"name": "㈜마스터메디텍", "total": 999.99, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.99}, "note": "간암치료제 신약 개발"}, "티씨머티리얼스": {"name": "㈜티씨머티리얼스", "total": 999.97, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 999.97}, "note": "스팩합병상장후 장내 전량 매각(25.5.15)"}, "비엘멜라니스": {"name": "㈜비엘멜라니스", "total": 999.96613, "sector": "제조/산업재", "funds": {"유니콘스타트업(300억)": 999.96613}, "note": "나노 유기합성 MRI조영제(멜라닌)"}, "지바이오로직스": {"name": "㈜지바이오로직스", "total": 999.95, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.95}, "note": "sGal-9 췌장암 및 RA 치료제 등"}, "수퍼빈": {"name": "㈜수퍼빈", "total": 999.921358, "sector": "에너지/소재/환경", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 999.921358}, "note": "PET 등 재활용 솔루션"}, "KST모빌리티": {"name": "㈜KST모빌리티", "total": 999.898182, "sector": "물류/커머스", "funds": {"유니콘스타트업(300억)": 999.898182}, "note": "영업중단으로 감액(23.03.31)"}, "에이티센스": {"name": "㈜에이티센스", "total": 999.8372340000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.8372340000001}, "note": "웨어러블 심전도 측정기"}, "이지다이아텍": {"name": "㈜이지다이아텍", "total": 999.7750080000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.7750080000001}, "note": "뇌손상 POCT, 24년말 잔액 손상차손 환입"}, "코모토": {"name": "㈜코모토", "total": 999.6, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 999.6}, "note": "컨트롤밸브, 압력조정 밸브"}, "엔젤로보틱스": {"name": "㈜엔젤로보틱스", "total": 999.0, "sector": "AI/로보틱스", "funds": {"유니콘스타트업(300억)": 999.0}, "note": "24.3.26 ~5.7 장내매각"}, "위주": {"name": "㈜위주", "total": 996.0, "sector": "SW/플랫폼", "funds": {"유니콘스타트업(300억)": 996.0}, "note": "24.12.31 자본잠식으로 100% 감액"}, "엠씨넥스": {"name": "㈜엠씨넥스", "total": 910.0, "sector": "반도체/전자", "funds": {"신성장 메짜닌펀드 (80억)": 910.0}, "note": "(회수완료: 2012.02.13)"}, "오렌지스퀘어": {"name": "오렌지스퀘어", "total": 885.8040000000001, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 885.8040000000001}, "note": "금융거래용 암호화 2채널 SMS 솔류션"}, "지디케이화장품": {"name": "지디케이화장품㈜", "total": 810.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 810.0}, "note": "마스크팩(메디힐) 제조 등"}, "켐포트": {"name": "㈜켐포트", "total": 810.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 810.0}, "note": "오메가3 제조(MIFAFF조합 매도분 일부인수)"}, "하이젠헬스케어": {"name": "㈜하이젠헬스케어", "total": 800.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 800.0}, "note": "병원용 HIS,PACS 시스템"}, "텝스": {"name": "㈜텝스", "total": 800.0, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 800.0}, "note": "(완전잠식 21.12.31 감액)"}, "파워팩": {"name": "㈜파워팩", "total": 779.954, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 779.954}, "note": "포장용 판지 제조업"}, "에어스메디컬": {"name": "㈜에어스메디컬", "total": 746.705688, "sector": "바이오/헬스케어", "funds": {"AIM세컨더리 (550억)": 746.705688}, "note": "의료 AI 솔루션"}, "메디파마플랜": {"name": "㈜메디파마플랜", "total": 660.0, "sector": "바이오/헬스케어", "funds": {"(조합 계정 합계)": 660.0}, "note": "(회수완료: 2012.08.06)"}, "성화": {"name": "㈜성화", "total": 600.0, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 600.0}, "note": "2025.12.31 전액손상"}, "21세기": {"name": "㈜21세기", "total": 500.016, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.016}, "note": "50% 원리금 회수(2019.07.01)"}, "인핸스드바이오": {"name": "㈜인핸스드바이오", "total": 500.00079999999997, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.00079999999997}, "note": "siRNA기반 유전자치료제, 23년말 전액감액"}, "MTS나노테크": {"name": "㈜MTS나노테크", "total": 500.0, "sector": "에너지/소재/환경", "funds": {"KoFC펀드 (335억)": 400.0, "신성장 메짜닌펀드 (80억)": 100.0}, "note": "회수불능&해산결의로 감액 (22.06.30)"}, "코센테크": {"name": "㈜코센테크", "total": 500.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 500.0}, "note": "(회수:2014.11.06)(단,명의개서:2016.07.01)"}, "에이치앤": {"name": "㈜에이치앤", "total": 500.0, "sector": "소비재/F&B", "funds": {"신성장 메짜닌펀드 (80억)": 500.0}, "note": "농산물 유통 등(회수불능으로 감액 20.12.31)"}, "뉴로피드": {"name": "㈜뉴로피드", "total": 500.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 500.0}, "note": "(회수완료: 2020.08.31)"}, "크로넥스": {"name": "크로넥스", "total": 500.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.0}, "note": "비임상CRO,미니피그"}, "뉴웨이블": {"name": "뉴웨이블", "total": 499.999955, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.999955}, "note": "2024.12.31 전액잠식으로 100%감액"}, "위니플": {"name": "㈜위니플", "total": 499.997856, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.997856}, "note": "모바일 APP 제작(영업중단 20.12.31 감액)"}, "제이크리에이션": {"name": "㈜제이크리에이션", "total": 499.95, "sector": "소비재/F&B", "funds": {"신성장 메짜닌펀드 (80억)": 499.95}, "note": "제주용암수 제조\n(회생신청 감액 21.03.31)(회생채권매각)"}, "에프알디": {"name": "㈜에프알디", "total": 499.935803, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.935803}, "note": "23.01.04 자사주방식으로 매각완료"}, "비이아이랩": {"name": "㈜비이아이랩", "total": 499.749888, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 499.749888}, "note": "리튬메탈 전고체전지 소재 개발"}, "루센트블록": {"name": "㈜루센트블록", "total": 499.716, "sector": "SW/플랫폼", "funds": {"돌핀M&A조합(505.3억)": 499.716}, "note": "부동산 수익증권(EABS) 거래플랫폼"}, "인사이너리": {"name": "㈜인사이너리", "total": 499.20000000000005, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.20000000000005}, "note": "바이너리 오픈소스 검증 솔루션"}, "씨와이": {"name": "㈜씨와이", "total": 498.0, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 498.0}, "note": "한약탕전 위탁제조 외(가/나목 충족)\n회생신청으로 전액감액(21.03.31)"}, "이앤이매니지먼트": {"name": "이앤이매니지먼트㈜", "total": 450.0, "sector": "에너지/소재/환경", "funds": {"(조합 계정 합계)": 450.0}, "note": "환경/에너지 컨설팅업(회수액 120만원)"}, "이지템": {"name": "㈜이지템", "total": 428.82, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 428.82}, "note": "피부미용,의료기기"}, "엑스엘게임즈": {"name": "㈜엑스엘게임즈", "total": 305.0, "sector": "콘텐츠/교육", "funds": {"신성장 메짜닌펀드 (80억)": 305.0}, "note": "MMORPG(아키에이지,문명온라인)게임사"}, "화인": {"name": "㈜화인", "total": 250.0, "sector": "제조/산업재", "funds": {"(조합 계정 합계)": 250.0}, "note": "(회수완료: 2013.10.11)"}, "유에스티": {"name": "㈜유에스티", "total": 100.0, "sector": "제조/산업재", "funds": {"(조합 계정 합계)": 100.0}, "note": "(회수완료 2018.10.18 708백만원,장내매각)"}, "아시아자원개발": {"name": "아시아자원개발㈜", "total": 1.0, "sector": "에너지/소재/환경", "funds": {"펀드출자 3펀드": 1.0}, "note": "천연자원 수출입업(전액감액.19.12.31)"}, "휴민텍": {"name": "㈜휴민텍", "total": 0.023528, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 0.023528}, "note": ""}, "라인어스": {"name": "㈜라인어스", "total": 0.00217, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 0.00217}, "note": "보통주전환시 단주입금"}, "티씨티": {"name": "㈜티씨티", "total": 0.000888, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 0.000888}, "note": "비츠로시스 CB 단주대금 입금(22.12.16)"}}};</script>
 <script src="weekly_data.js"></script>
+<script src="history_data.js"></script>
+<script>if(typeof HISTORY_MD_RAW!=='undefined'){HISTORY_EMBEDDED=parseHistoryMd(HISTORY_MD_RAW)}</script>
 </body>
 </html>
