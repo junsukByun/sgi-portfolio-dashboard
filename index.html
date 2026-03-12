@@ -145,7 +145,36 @@ tr:hover td{background:#f7fafc}
 .hist-watch-card .hw-issue{font-size:12px;color:var(--muted);line-height:1.5}
 .hist-upload-area{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;background:#fff;margin-bottom:16px;box-shadow:var(--shadow)}
 .hist-upload-area:hover{border-color:var(--accent);background:var(--accent-lt)}
-@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.nav-links button{padding:6px 10px;font-size:12px}.hist-watchlist{grid-template-columns:1fr}.wr-table{font-size:11px}}
+/* Chat tab styles */
+.chat-container{display:flex;flex-direction:column;height:calc(100vh - 80px);padding:0 32px 16px}
+.chat-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.chat-header h2{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.chat-api-section{display:flex;align-items:center;gap:8px}
+.chat-api-input{padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;width:280px;font-family:monospace}
+.chat-api-input:focus{border-color:var(--accent);outline:none}
+.chat-api-btn{padding:6px 14px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:12px;cursor:pointer;font-weight:600}
+.chat-api-btn:hover{border-color:var(--accent);color:var(--accent)}
+.chat-api-btn.saved{background:var(--accent-lt);color:var(--accent);border-color:var(--accent)}
+.chat-messages{flex:1;overflow-y:auto;padding:16px 0;display:flex;flex-direction:column;gap:12px}
+.chat-msg{max-width:85%;padding:12px 16px;border-radius:12px;font-size:13px;line-height:1.7;word-break:break-word}
+.chat-msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.chat-msg.assistant{align-self:flex-start;background:#fff;border:1px solid var(--border);color:var(--text);border-bottom-left-radius:4px;box-shadow:var(--shadow)}
+.chat-msg.assistant strong{color:var(--accent)}
+.chat-msg.system{align-self:center;background:#fffaf0;border:1px solid #fbd38d;color:#975a16;font-size:12px;text-align:center;max-width:100%}
+.chat-msg.loading{align-self:flex-start;background:#f7fafc;border:1px solid var(--border);color:var(--muted);font-style:italic}
+.chat-input-area{display:flex;gap:8px;padding:12px 0;border-top:1px solid var(--border)}
+.chat-input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;outline:none;resize:none;font-family:inherit;min-height:44px;max-height:120px}
+.chat-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,86,50,0.1)}
+.chat-send{padding:0 20px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.chat-send:hover{background:var(--accent2)}
+.chat-send:disabled{background:#cbd5e0;cursor:not-allowed}
+.chat-welcome{text-align:center;padding:60px 20px;color:var(--muted)}
+.chat-welcome h3{font-size:16px;color:var(--text);margin-bottom:8px}
+.chat-welcome p{font-size:13px;margin-bottom:16px}
+.chat-examples{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chat-example{padding:8px 14px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;transition:all 0.15s;color:var(--text)}
+.chat-example:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-lt)}
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.nav-links button{padding:6px 10px;font-size:12px}.hist-watchlist{grid-template-columns:1fr}.wr-table{font-size:11px}.chat-api-section{flex-direction:column}.chat-api-input{width:200px}.chat-msg{max-width:95%}}
 </style>
 </head>
 <body>
@@ -167,6 +196,7 @@ tr:hover td{background:#f7fafc}
 <button class="active" onclick="showPage('portfolio',this)">Portfolio</button>
 <button onclick="showPage('weekly',this)">Weekly Report</button>
 <button onclick="showPage('history',this)">History</button>
+<button onclick="showPage('chat',this)">Chat</button>
 <button onclick="showPage('settings',this)">Settings</button>
 </div>
 </div>
@@ -212,6 +242,35 @@ tr:hover td{background:#f7fafc}
 <div id="historyContent"></div>
 </div>
 </div>
+<div class="page" id="page-chat">
+<div class="chat-container">
+<div class="chat-header">
+<h2>AI Assistant</h2>
+<div class="chat-api-section">
+<input type="password" class="chat-api-input" id="chatApiKey" placeholder="Claude API Key (sk-ant-...)" autocomplete="off">
+<button class="chat-api-btn" id="chatApiBtn" onclick="saveChatApiKey()">저장</button>
+</div>
+</div>
+<div class="chat-messages" id="chatMessages">
+<div class="chat-welcome">
+<h3>SGI 포트폴리오 AI 어시스턴트</h3>
+<p>대시보드에 로드된 포트폴리오, 주간보고, 히스토리 데이터를 기반으로 질문에 답합니다.</p>
+<div class="chat-examples">
+<div class="chat-example" onclick="askExample(this)">펭귄펀드 만기 언제야?</div>
+<div class="chat-example" onclick="askExample(this)">바이오 섹터 투자 현황 정리해줘</div>
+<div class="chat-example" onclick="askExample(this)">파인트리 현재 상태는?</div>
+<div class="chat-example" onclick="askExample(this)">이번주 신규 검토 기업은?</div>
+<div class="chat-example" onclick="askExample(this)">투자금액 TOP 5 기업</div>
+<div class="chat-example" onclick="askExample(this)">만기 도래 펀드 정리해줘</div>
+</div>
+</div>
+</div>
+<div class="chat-input-area">
+<textarea class="chat-input" id="chatInput" placeholder="질문을 입력하세요..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+<button class="chat-send" id="chatSendBtn" onclick="sendChat()">전송</button>
+</div>
+</div>
+</div>
 <div class="page" id="page-settings">
 <div class="upload-section">
 <h2 style="margin-bottom:16px;font-size:18px;font-weight:800;letter-spacing:-0.5px">데이터 관리</h2>
@@ -253,7 +312,7 @@ function initApp(){DATA=JSON.parse(localStorage.getItem(SK))||DEFAULT_DATA;const
 if(typeof WEEKLY_EMBEDDED!=='undefined'&&WEEKLY_EMBEDDED.length){const ed=new Set(WEEKLY.map(w=>w.date));WEEKLY_EMBEDDED.forEach(w=>{if(!ed.has(w.date))WEEKLY.push(w)});WEEKLY.sort((a,b)=>b.date.localeCompare(a.date))}
 const hs=localStorage.getItem(HK);if(hs)try{HISTORY_DATA=JSON.parse(hs)}catch(e){HISTORY_DATA=[]}
 if(typeof HISTORY_EMBEDDED!=='undefined'&&HISTORY_EMBEDDED){HISTORY_DATA=HISTORY_EMBEDDED}
-renderPortfolio();renderWeekly();renderHistory();setupUpload();setupWeeklyUpload();setupHistUpload()}
+renderPortfolio();renderWeekly();renderHistory();setupUpload();setupWeeklyUpload();setupHistUpload();initChatApiKey()}
 function renderPortfolio(){destroyCharts();const co=Object.entries(DATA.companies).map(([k,v])=>({key:k,...v})).sort((a,b)=>b.total-a.total);const tot=co.reduce((s,c)=>s+c.total,0),mx=co[0]?.total||1;const ss={};co.forEach(c=>{if(!ss[c.sector])ss[c.sector]={n:0,a:0};ss[c.sector].n++;ss[c.sector].a+=c.total});const sa=Object.entries(ss).sort((a,b)=>b[1].a-a[1].a);const fs={};co.forEach(c=>Object.entries(c.funds).forEach(([f,a])=>{if(!fs[f])fs[f]={n:0,a:0};fs[f].n++;fs[f].a+=a}));const fa=Object.entries(fs).sort((a,b)=>b[1].a-a[1].a);const mf=co.filter(c=>Object.keys(c.funds).length>=2).length;
 document.getElementById('dataDate').textContent='기준일: '+DATA.updated;document.getElementById('currentDate2').textContent=DATA.updated;
 document.getElementById('kpis').innerHTML=`<div class="kpi"><div class="label">투자중 기업수</div><div class="value v1">${co.length}개사</div><div class="sub">${sa.length}개 섹터</div></div><div class="kpi"><div class="label">총 투자잔액</div><div class="value v2">${(tot/100).toLocaleString('ko-KR',{maximumFractionDigits:0})}억원</div><div class="sub">${tot.toLocaleString('ko-KR',{maximumFractionDigits:0})}백만원</div></div><div class="kpi"><div class="label">운용 펀드</div><div class="value v3">${fa.length}개</div><div class="sub">평균 ${(tot/fa.length/100).toFixed(0)}억/펀드</div></div><div class="kpi"><div class="label">다수펀드 투자</div><div class="value v4">${mf}개사</div><div class="sub">2개+ 펀드 중복투자</div></div>`;
@@ -633,6 +692,121 @@ html+='</tbody></table></div>'
 html+='</div>'
 }
 el.innerHTML=html
+}
+// ========== CHAT ==========
+const CHAT_KEY='sgi_chat_api';let chatHistory=[];
+function saveChatApiKey(){
+const k=document.getElementById('chatApiKey').value.trim();
+if(k){localStorage.setItem(CHAT_KEY,k);document.getElementById('chatApiBtn').textContent='저장됨';document.getElementById('chatApiBtn').classList.add('saved');document.getElementById('chatApiKey').value='••••••••••••';setTimeout(()=>{document.getElementById('chatApiBtn').textContent='저장';document.getElementById('chatApiBtn').classList.remove('saved')},2000)}
+}
+function initChatApiKey(){
+const k=localStorage.getItem(CHAT_KEY);
+if(k){document.getElementById('chatApiKey').value='••••••••••••';document.getElementById('chatApiBtn').textContent='변경'}
+}
+function buildContext(){
+let ctx='당신은 SGI(삼호그린인베스트먼트) 포트폴리오 데이터를 기반으로 질문에 답하는 AI 어시스턴트입니다.\n한국어로 간결하게 답변하세요.\n\n';
+// Portfolio data
+if(DATA&&DATA.companies){
+const co=Object.values(DATA.companies).sort((a,b)=>b.total-a.total);
+ctx+=`## 포트폴리오 현황 (기준일: ${DATA.updated})\n`;
+ctx+=`총 ${co.length}개 기업, 총 투자잔액 ${(co.reduce((s,c)=>s+c.total,0)/100).toFixed(0)}억원\n\n`;
+ctx+='| 기업명 | 섹터 | 투자금액(백만) | 펀드 | 비고 |\n|---|---|---|---|---|\n';
+co.forEach(c=>{
+const funds=Object.entries(c.funds).map(([f,a])=>`${f}(${(a/100).toFixed(0)}억)`).join(', ');
+ctx+=`| ${c.name} | ${c.sector} | ${c.total.toFixed(0)} | ${funds} | ${c.note||''} |\n`
+});
+ctx+='\n'
+}
+// History data
+if(HISTORY_DATA&&HISTORY_DATA.raw){
+ctx+='## SGI History (주간회의 어젠다)\n';
+ctx+=HISTORY_DATA.raw.substring(0,8000)+'\n\n'
+}
+// Weekly reports (latest 3)
+if(WEEKLY&&WEEKLY.length){
+ctx+='## 최근 주간업무보고\n';
+WEEKLY.slice(0,3).forEach(w=>{
+ctx+=`### ${w.date} ${w.title}\n`;
+ctx+=(w.content||'').substring(0,2000)+'\n\n'
+})
+}
+return ctx
+}
+function addChatMsg(role,text){
+const el=document.getElementById('chatMessages');
+const welcome=el.querySelector('.chat-welcome');
+if(welcome)welcome.remove();
+const div=document.createElement('div');
+div.className='chat-msg '+role;
+// Simple markdown-like formatting for assistant
+if(role==='assistant'){
+let html=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+html=html.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+html=html.replace(/\n/g,'<br>');
+div.innerHTML=html
+}else{
+div.textContent=text
+}
+el.appendChild(div);
+el.scrollTop=el.scrollHeight;
+return div
+}
+async function sendChat(){
+const input=document.getElementById('chatInput');
+const msg=input.value.trim();
+if(!msg)return;
+const apiKey=localStorage.getItem(CHAT_KEY);
+if(!apiKey){addChatMsg('system','API Key를 먼저 입력해주세요. (우측 상단)');return}
+input.value='';
+input.style.height='44px';
+addChatMsg('user',msg);
+chatHistory.push({role:'user',content:msg});
+// Loading indicator
+const loading=addChatMsg('loading','답변 생성 중...');
+document.getElementById('chatSendBtn').disabled=true;
+try{
+const sysPrompt=buildContext();
+// Keep last 10 messages for context
+const messages=chatHistory.slice(-10);
+const res=await fetch('https://api.anthropic.com/v1/messages',{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+'x-api-key':apiKey,
+'anthropic-version':'2023-06-01',
+'anthropic-dangerous-direct-browser-access':'true'
+},
+body:JSON.stringify({
+model:'claude-haiku-4-5-20251001',
+max_tokens:1024,
+system:sysPrompt,
+messages:messages
+})
+});
+loading.remove();
+if(!res.ok){
+const err=await res.json().catch(()=>({}));
+const errMsg=err.error?.message||`API 오류 (${res.status})`;
+addChatMsg('system',errMsg);
+chatHistory.pop();
+document.getElementById('chatSendBtn').disabled=false;
+return
+}
+const data=await res.json();
+const reply=data.content?.[0]?.text||'응답을 받지 못했습니다.';
+addChatMsg('assistant',reply);
+chatHistory.push({role:'assistant',content:reply})
+}catch(e){
+loading.remove();
+addChatMsg('system','네트워크 오류: '+e.message);
+chatHistory.pop()
+}
+document.getElementById('chatSendBtn').disabled=false;
+document.getElementById('chatInput').focus()
+}
+function askExample(el){
+document.getElementById('chatInput').value=el.textContent;
+sendChat()
 }
 </script>
 <script>const DEFAULT_DATA={"updated": "2026.01.30", "companies": {"파인트리": {"name": "㈜파인트리", "total": 13948.86886692, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 1387.5111000000002, "SGI세컨더리 2호(84억)": 1387.5111000000002, "그린뉴딜 펀드 (300억)": 1217.718782, "초격차펀드 (408억)": 2036.018213, "AIM세컨더리 (550억)": 2362.138557, "딥테크 25-2 (77억)": 5557.971114919999}, "note": "EGFR, NRP1 타겟 이중항체등 신약개발"}, "국일도어테크": {"name": "국일도어테크㈜", "total": 9999.72, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 9999.72}, "note": "방화문, 도어 하드웨어 제조(i-b)"}, "코멤텍": {"name": "㈜코멤텍", "total": 6500.231714, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.06, "GS칼텍스 케미칼펀드(157.5억)": 3000.156192, "Hydrogen Tech조합(63.5억)": 3000.0155219999997}, "note": "PTFE 멤브레인 제조"}, "관악아날로그": {"name": "관악아날로그㈜", "total": 6500.0826, "sector": "반도체/전자", "funds": {"초격차펀드 (408억)": 999.933, "SGI-KD 초격차반도체(58억)": 5500.1496}, "note": "아나로그반도체 펩리스"}, "아이트로닉스": {"name": "㈜아이트로닉스", "total": 5455.9616000000005, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 5455.9616000000005}, "note": "미수금 20억"}, "클라리파이": {"name": "㈜클라리파이", "total": 5100.005666, "sector": "AI/로보틱스", "funds": {"신성장 메짜닌펀드 (80억)": 1500.004993, "딥테크 25-2 (77억)": 1600.002584, "SGI-IBKC  딥테크 조합 (500억)": 1999.998089}, "note": "의료 AI 솔루션"}, "비츠로시스": {"name": "㈜비츠로시스", "total": 5000.0, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 5000.0}, "note": "일반상환청구후 회사의 만기전취득(매매)"}, "스킨앤스킨": {"name": "㈜스킨앤스킨", "total": 4999.99991, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 4999.99991}, "note": "1,000만주 블럭딜"}, "썬테크": {"name": "㈜썬테크", "total": 4100.01465, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 2100.00725, "SGI세컨더리 2호(84억)": 2000.0074}, "note": "영구자석 발전기 제조 (@5,405.425)"}, "퓨리켐": {"name": "㈜퓨리켐", "total": 3716.628804, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1216.632, "퍼스트펭귄 스타트업펀드 (390억)": 1000.0, "그린뉴딜 펀드 (300억)": 1499.996804}, "note": "커페시터 EDLC 등 제조(18년감사:50%감액)"}, "씨알푸드": {"name": "㈜씨알푸드", "total": 3142.0, "sector": "소비재/F&B", "funds": {"SGI세컨더리 2호(84억)": 3142.0}, "note": "씨리얼 제조(원금 20억)"}, "코너스": {"name": "㈜코너스", "total": 3081.0, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 3081.0}, "note": "스마트 안전 에이전스 솔류션/휴먼씨 인수"}, "엔도로보틱스": {"name": "㈜엔도로보틱스", "total": 3040.968, "sector": "AI/로보틱스", "funds": {"AIM세컨더리 (550억)": 3040.968}, "note": "내시경 수술용 로봇 시스템"}, "브이에스아이": {"name": "㈜브이에스아이", "total": 3000.001905, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.0, "그린뉴딜 펀드 (300억)": 2000.001905}, "note": "제전기,CNT paste제조"}, "엑시아머티리얼스": {"name": "㈜엑시아머티리얼스", "total": 3000.0, "sector": "에너지/소재/환경", "funds": {"KoFC펀드 (335억)": 3000.0}, "note": "자본잠식&해산결의로 감액 (22.06.30)"}, "파두": {"name": "㈜파두", "total": 2999.9101579999992, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.9999999999998, "유니콘스타트업(300억)": 999.910158}, "note": "22.06.29 전환청구, 단주 입금"}, "노벨티노빌리티": {"name": "㈜노벨티노빌리티", "total": 2800.100841, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 1000.04229, "그린뉴딜 펀드 (300억)": 1000.04229, "AIM세컨더리 (550억)": 800.0162610000001}, "note": "c-Kit항제 및 ADC개발,24.12.20 전환청구"}, "피크바이오,PH파마": {"name": "㈜피크바이오,PH파마", "total": 2663.766, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1775.844, "유니콘스타트업(300억)": 887.922}, "note": "2025.10.17 나스닥 장내매도로 일부 회수"}, "베스텔라랩": {"name": "㈜베스텔라랩", "total": 2500.007516, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1000.006, "초격차펀드 (408억)": 1500.001516}, "note": "자율주차 플랫폼 구축"}, "씨앤큐어": {"name": "㈜씨앤큐어", "total": 2500.00695, "sector": "제조/산업재", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 2500.00695}, "note": "미생물 기반 항암치료제"}, "바이오코프": {"name": "바이오코프㈜", "total": 2500.002, "sector": "바이오/헬스케어", "funds": {"전남그린 펀드 (76억)": 1000.002, "GS칼텍스 케미칼펀드(157.5억)": 1500.0}, "note": "크릴오일 생산(舊:바이올시스템즈)"}, "커피베이": {"name": "㈜커피베이", "total": 2499.993034, "sector": "소비재/F&B", "funds": {"돌핀M&A조합(505.3억)": 2499.993034}, "note": "커피 프랜차이즈"}, "씨너지": {"name": "㈜씨너지", "total": 2499.978694, "sector": "AI/로보틱스", "funds": {"초격차펀드 (408억)": 1999.5767919999998, "AIM세컨더리 (550억)": 500.401902}, "note": "탄소배출권 거래 AI SaaS 플랫폼"}, "HMR": {"name": "㈜HMR", "total": 2499.96, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 500.0, "KoFC펀드 (335억)": 1999.96}, "note": "고순도 알루미나 제조"}, "에스바이오메딕스": {"name": "㈜에스바이오메딕스", "total": 2178.95667, "sector": "바이오/헬스케어", "funds": {"펀드출자 3펀드": 2178.95667}, "note": "코스닥상장후 장내매각(23.6.5/24.3.26)"}, "에이앤피테크": {"name": "㈜에이앤피테크", "total": 2100.004, "sector": "반도체/전자", "funds": {"KoFC펀드 (335억)": 2100.004}, "note": "LED 도광판 제조외"}, "시지트로닉스": {"name": "㈜시지트로닉스", "total": 2002.688, "sector": "반도체/전자", "funds": {"유니콘스타트업(300억)": 1001.344, "그린뉴딜 펀드 (300억)": 1001.344}, "note": "차량용,통신용 반도체 소자(Si,GaN)"}, "바이오닉스": {"name": "㈜바이오닉스", "total": 2000.29848, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 2000.29848}, "note": "원금 100% 조기상환(24.6.20/6.28)"}, "바오밥에이바이오": {"name": "바오밥에이바이오", "total": 2000.25, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.25}, "note": "Cryo EM 활용 신약개발"}, "히에라바이오": {"name": "㈜히에라바이오", "total": 2000.1408000000001, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 1000.0704000000001, "그린뉴딜 펀드 (300억)": 1000.0704000000001}, "note": "줄기세포치료제 개발"}, "아이엠비디엑스": {"name": "㈜아이엠비디엑스", "total": 2000.1185600000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.1185600000001}, "note": "액체생검(암진단)"}, "코아시아넥셀양/최성지)": {"name": "㈜코아시아넥셀 양/최성지)", "total": 2000.075132, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.075132}, "note": "2025.12.31 전액손상"}, "메디퓨처스": {"name": "메디퓨처스㈜", "total": 2000.04576, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.02288, "유니콘스타트업(300억)": 1000.02288}, "note": "초음파 의료용봉합사 제조"}, "프리시스": {"name": "프리시스㈜", "total": 2000.035, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.035}, "note": "(매각처리: 2018.08.17)"}, "HKMnS": {"name": "HK MnS㈜", "total": 2000.0349999999999, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.0349999999999}, "note": "(회수:2014.12.26)(회수:2015.12.28)"}, "디에스앤텍": {"name": "㈜디에스앤텍", "total": 2000.0125, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 500.0125, "KoFC펀드 (335억)": 1500.0}, "note": "(상환완료23.11.03-매각으로 종결)"}, "솔리비스": {"name": "㈜솔리비스", "total": 2000.01208, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1000.04368, "초격차펀드 (408억)": 999.9684}, "note": "고체 전해질 개발"}, "옵토레인": {"name": "㈜옵토레인", "total": 2000.010302, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.010302}, "note": "반도체기반의 Real time PCR 칩/리더기개발"}, "아이엠티": {"name": "㈜아이엠티", "total": 2000.00337, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 2000.00337}, "note": "23.7.25구주매각(40만주/YG,하랑),10월 장내매도"}, "이뮤니스바이오": {"name": "㈜이뮤니스바이오", "total": 2000.00035, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 2000.00035}, "note": "NK 면역세포치료제 개발"}, "나눔에너지": {"name": "나눔에너지㈜", "total": 2000.0, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 2000.0}, "note": "(회수완료: 2010.07.14)"}, "위엠비": {"name": "㈜위엠비", "total": 2000.0, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 2000.0}, "note": "통합관제솔루션"}, "켐토피아": {"name": "㈜켐토피아", "total": 2000.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 2000.0}, "note": "스마트 환경,안전관리 플랫폼"}, "메를로랩": {"name": "㈜메를로랩", "total": 1999.9995, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1999.9995}, "note": "메쉬 네트워크 기반 전력관리시스템"}, "알파플러스": {"name": "㈜알파플러스", "total": 1999.9985, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1999.9985}, "note": "(회수완료:2016.06.30 제3자매각)"}, "파트론ESL": {"name": "㈜파트론ESL", "total": 1999.99783, "sector": "반도체/전자", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.99783}, "note": "전자가격표시기 제조"}, "소바젠": {"name": "㈜소바젠", "total": 1999.985928, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1999.985928}, "note": "뇌전증치료제 개발"}, "지브레인": {"name": "㈜지브레인", "total": 1999.9847, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 999.9765, "초격차펀드 (408억)": 1000.0082}, "note": "뇌전증 진단, 치료 의료기기 개발"}, "크라우드웍스": {"name": "㈜크라우드웍스", "total": 1999.982, "sector": "AI/로보틱스", "funds": {"돌핀M&A조합(505.3억)": 1999.982}, "note": "장내매각"}, "셀비온": {"name": "㈜셀비온", "total": 1999.97775, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1999.97775}, "note": "24.10.16,17 코스닥장내매도"}, "휴민로보틱스": {"name": "㈜휴민로보틱스", "total": 1999.976472, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1999.976472}, "note": "이차전지,OLED 자동화 장비"}, "엘케이켐": {"name": "㈜엘케이켐", "total": 1999.965, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1999.965}, "note": "IPO 장내매각(25.02.25~27)"}, "액트테라퓨틱스": {"name": "액트테라퓨틱스㈜", "total": 1999.812254, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 999.906127, "그린뉴딜 펀드 (300억)": 999.906127}, "note": "CAR-T 치료제 개발/24.9.30 전액감액"}, "우나스텔라": {"name": "㈜우나스텔라", "total": 1999.802, "sector": "우주/방산", "funds": {"초격차펀드 (408억)": 1999.802}, "note": "저궤도용 우주발사체"}, "트리즈커머스": {"name": "㈜트리즈커머스", "total": 1996.8, "sector": "물류/커머스", "funds": {"돌핀M&A조합(505.3억)": 1996.8}, "note": "전자상거래업,인플루언서 매니징/커머스"}, "Cytovant": {"name": "Cytovant", "total": 1879.499817, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1879.499817}, "note": "TCR-T 등 항암제, 23년말 80%감액"}, "큐젠바이오텍": {"name": "㈜큐젠바이오텍", "total": 1831.5, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1831.5}, "note": "베타글루칸(화장품재료,하이드로겔 등)\n회생신청으로 전액 감액(21.09.30)\n회생계획승인 54.5% 988"}, "호전에이블": {"name": "㈜호전에이블", "total": 1791.315, "sector": "반도체/전자", "funds": {"AIM세컨더리 (550억)": 1791.315}, "note": "반도체 패키징 접합소재"}, "에어스메디칼": {"name": "㈜에어스메디칼", "total": 1515.373308, "sector": "바이오/헬스케어", "funds": {"초격차펀드 (408억)": 1515.373308}, "note": "의료 AI 솔루션"}, "브이에스팜텍": {"name": "㈜브이에스팜텍", "total": 1500.2819, "sector": "바이오/헬스케어", "funds": {"돌핀M&A조합(505.3억)": 750.14095, "그린뉴딜 펀드 (300억)": 750.14095}, "note": "방사선 민감제 개발"}, "블루타일랩": {"name": "㈜블루타일랩", "total": 1500.02619, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 1500.02619}, "note": "AI기반 비전검사,펨토초레이저 소스"}, "케이웨더": {"name": "케이웨더㈜", "total": 1500.009, "sector": "물류/커머스", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1500.009}, "note": "24.2.11/3.22/5.22 장내매각"}, "에코세이브": {"name": "에코세이브㈜", "total": 1500.0, "sector": "에너지/소재/환경", "funds": {"전남그린 펀드 (76억)": 1500.0}, "note": "자원재활용 자동화 설비 제조 외"}, "바칠라캐빈": {"name": "바칠라캐빈㈜", "total": 1500.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1500.0}, "note": "선박용 Unit Cabin 제조 외"}, "박셀바이오": {"name": "㈜박셀바이오", "total": 1500.0, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 1500.0}, "note": "코스닥 상장 장내매각(20.12.28)"}, "다임바이오": {"name": "다임바이오㈜", "total": 1499.991328, "sector": "바이오/헬스케어", "funds": {"초격차펀드 (408억)": 1499.991328}, "note": "항암제,퇴행성뇌질환치료제 개발"}, "써머스플랫폼": {"name": "㈜써머스플랫폼", "total": 1412.0313130000002, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 1412.0313130000002}, "note": "모회사와 포괄적주식교환시 주식매수청구권 행사"}, "가제트코리아": {"name": "㈜가제트코리아", "total": 1358.744925, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1358.744925}, "note": "e-SIM 데이터로밍 서비스"}, "로앤컴퍼니": {"name": "㈜로앤컴퍼니", "total": 1348.321273, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1348.321273}, "note": "법률검색 플랫폼"}, "덴티움": {"name": "㈜덴티움", "total": 1300.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 1300.0}, "note": "(회수완료: 2011.10.18)"}, "클레어픽셀": {"name": "㈜클레어픽셀", "total": 1135.00375, "sector": "바이오/헬스케어", "funds": {"KoFC펀드 (335억)": 1135.00375}, "note": "2023.12.31 90% 감액"}, "테크트랜스": {"name": "테크트랜스", "total": 1050.0039, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1050.0039}, "note": "보통주전환시 단주입금"}, "비에스지머티리얼즈": {"name": "㈜비에스지머티리얼즈", "total": 1005.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1005.0}, "note": "2차전지 음극재용 실리콘 복합소재"}, "웨이센": {"name": "㈜웨이센", "total": 1003.0020000000001, "sector": "AI/로보틱스", "funds": {"유니콘스타트업(300억)": 1003.0020000000001}, "note": "위내시경 진단보조 AI 소프트웨어 개발"}, "심플플래닛": {"name": "㈜심플플래닛", "total": 1000.9798000000001, "sector": "소비재/F&B", "funds": {"초격차펀드 (408억)": 1000.9798000000001}, "note": "세포배양식품 및 기능성원료"}, "뷰런테크놀로지": {"name": "㈜뷰런테크놀로지", "total": 1000.9656, "sector": "AI/로보틱스", "funds": {"초격차펀드 (408억)": 1000.9656}, "note": "자율주행 라이다 솔루션"}, "비엔에스알": {"name": "㈜비엔에스알", "total": 1000.2, "sector": "반도체/전자", "funds": {"SGI-IBKC  딥테크 조합 (500억)": 1000.2}, "note": "반도체 공정 진단장비"}, "트레드링스": {"name": "㈜트레드링스", "total": 1000.1824799999999, "sector": "물류/커머스", "funds": {"그린뉴딜 펀드 (300억)": 1000.1824799999999}, "note": "스마트물류 플랫폼, 25년말 손상환입"}, "BMT": {"name": "㈜BMT", "total": 1000.1458, "sector": "제조/산업재", "funds": {"유니콘스타트업(300억)": 1000.1458}, "note": "24.12.31 자본잠식으로 100% 감액"}, "라미나": {"name": "㈜라미나", "total": 1000.125, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.125}, "note": "2023.12.31 90% 감액"}, "엔비스아나": {"name": "엔비스아나㈜", "total": 1000.105, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.105}, "note": "(3자매각 회수완료,2021.12.14)"}, "에스유엠": {"name": "㈜에스유엠", "total": 1000.098, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 1000.098}, "note": "자율주행 솔루션 개발"}, "미림진": {"name": "㈜미림진", "total": 1000.0733399999999, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0733399999999}, "note": "자가면역질환 치료제"}, "숨비": {"name": "㈜숨비", "total": 1000.008, "sector": "우주/방산", "funds": {"AIM세컨더리 (550억)": 1000.008}, "note": "산업용, 국방용 드론제조"}, "이엔테크놀로지": {"name": "이엔테크놀로지㈜", "total": 1000.0035, "sector": "반도체/전자", "funds": {"KoFC펀드 (335억)": 1000.0035}, "note": "전력공급장치 제조(2020.12.31 회생으로 감액)"}, "오스틴제약": {"name": "㈜오스틴제약", "total": 1000.0025, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 1000.0025}, "note": "24.07.12 풋옵션행사 입금완료(BS)"}, "GN1": {"name": "㈜GN1", "total": 1000.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 1000.0}, "note": "자동차 부품 제조(회생신청 17.3.31감액)"}, "왓챠": {"name": "㈜왓챠", "total": 1000.0, "sector": "콘텐츠/교육", "funds": {"신성장 메짜닌펀드 (80억)": 1000.0}, "note": "2025.06.30 전액감액(잠식,의견거절,회생신청)"}, "단비교육": {"name": "㈜단비교육", "total": 1000.0, "sector": "콘텐츠/교육", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.0}, "note": "유초등 인터넷 가정학습 서비스"}, "셀레믹스": {"name": "㈜셀레믹스", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 1000.0}, "note": "NGS기반 유전자분석 및 키트 개발"}, "코멕스카본": {"name": "㈜코멕스카본", "total": 1000.0, "sector": "에너지/소재/환경", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "OLED용 흑연제품(도가니)"}, "펠레메드": {"name": "㈜펠레메드", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "폐암치료제 신약 개발(NRDO)"}, "노바셀테크놀로지": {"name": "노바셀테크놀로지", "total": 1000.0, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 1000.0}, "note": "아토피 등 펩타이드 면역치료제 개발"}, "에어포인트": {"name": "㈜에어포인트", "total": 1000.0, "sector": "반도체/전자", "funds": {"그린뉴딜 펀드 (300억)": 1000.0}, "note": "하이패스 ETC칩, 무선 BMS제조"}, "신성미네랄": {"name": "㈜신성미네랄", "total": 1000.0, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 1000.0}, "note": "23.7.31/23.12.31/24.7.1/25.1.2/25.4.30 분할상환"}, "한국해양기술": {"name": "한국해양기술㈜", "total": 1000.0, "sector": "제조/산업재", "funds": {"초격차펀드 (408억)": 1000.0}, "note": "해저캐이블공사,25.12.31 손상"}, "마이크로엑츄에이터": {"name": "마이크로엑츄에이터", "total": 999.999, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 999.999}, "note": "풋옵션 행사후 매매계약 체결하고 잔금 24.09.30수령 매도완료"}, "베지스타": {"name": "㈜베지스타", "total": 999.9909, "sector": "소비재/F&B", "funds": {"그린뉴딜 펀드 (300억)": 999.9909}, "note": "신선식품 가공업"}, "마스터메디텍": {"name": "㈜마스터메디텍", "total": 999.99, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.99}, "note": "간암치료제 신약 개발"}, "티씨머티리얼스": {"name": "㈜티씨머티리얼스", "total": 999.97, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 999.97}, "note": "스팩합병상장후 장내 전량 매각(25.5.15)"}, "비엘멜라니스": {"name": "㈜비엘멜라니스", "total": 999.96613, "sector": "제조/산업재", "funds": {"유니콘스타트업(300억)": 999.96613}, "note": "나노 유기합성 MRI조영제(멜라닌)"}, "지바이오로직스": {"name": "㈜지바이오로직스", "total": 999.95, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.95}, "note": "sGal-9 췌장암 및 RA 치료제 등"}, "수퍼빈": {"name": "㈜수퍼빈", "total": 999.921358, "sector": "에너지/소재/환경", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 999.921358}, "note": "PET 등 재활용 솔루션"}, "KST모빌리티": {"name": "㈜KST모빌리티", "total": 999.898182, "sector": "물류/커머스", "funds": {"유니콘스타트업(300억)": 999.898182}, "note": "영업중단으로 감액(23.03.31)"}, "에이티센스": {"name": "㈜에이티센스", "total": 999.8372340000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.8372340000001}, "note": "웨어러블 심전도 측정기"}, "이지다이아텍": {"name": "㈜이지다이아텍", "total": 999.7750080000001, "sector": "바이오/헬스케어", "funds": {"유니콘스타트업(300억)": 999.7750080000001}, "note": "뇌손상 POCT, 24년말 잔액 손상차손 환입"}, "코모토": {"name": "㈜코모토", "total": 999.6, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 999.6}, "note": "컨트롤밸브, 압력조정 밸브"}, "엔젤로보틱스": {"name": "㈜엔젤로보틱스", "total": 999.0, "sector": "AI/로보틱스", "funds": {"유니콘스타트업(300억)": 999.0}, "note": "24.3.26 ~5.7 장내매각"}, "위주": {"name": "㈜위주", "total": 996.0, "sector": "SW/플랫폼", "funds": {"유니콘스타트업(300억)": 996.0}, "note": "24.12.31 자본잠식으로 100% 감액"}, "엠씨넥스": {"name": "㈜엠씨넥스", "total": 910.0, "sector": "반도체/전자", "funds": {"신성장 메짜닌펀드 (80억)": 910.0}, "note": "(회수완료: 2012.02.13)"}, "오렌지스퀘어": {"name": "오렌지스퀘어", "total": 885.8040000000001, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 885.8040000000001}, "note": "금융거래용 암호화 2채널 SMS 솔류션"}, "지디케이화장품": {"name": "지디케이화장품㈜", "total": 810.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 810.0}, "note": "마스크팩(메디힐) 제조 등"}, "켐포트": {"name": "㈜켐포트", "total": 810.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 810.0}, "note": "오메가3 제조(MIFAFF조합 매도분 일부인수)"}, "하이젠헬스케어": {"name": "㈜하이젠헬스케어", "total": 800.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 800.0}, "note": "병원용 HIS,PACS 시스템"}, "텝스": {"name": "㈜텝스", "total": 800.0, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 800.0}, "note": "(완전잠식 21.12.31 감액)"}, "파워팩": {"name": "㈜파워팩", "total": 779.954, "sector": "제조/산업재", "funds": {"전남그린 펀드 (76억)": 779.954}, "note": "포장용 판지 제조업"}, "에어스메디컬": {"name": "㈜에어스메디컬", "total": 746.705688, "sector": "바이오/헬스케어", "funds": {"AIM세컨더리 (550억)": 746.705688}, "note": "의료 AI 솔루션"}, "메디파마플랜": {"name": "㈜메디파마플랜", "total": 660.0, "sector": "바이오/헬스케어", "funds": {"(조합 계정 합계)": 660.0}, "note": "(회수완료: 2012.08.06)"}, "성화": {"name": "㈜성화", "total": 600.0, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 600.0}, "note": "2025.12.31 전액손상"}, "21세기": {"name": "㈜21세기", "total": 500.016, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.016}, "note": "50% 원리금 회수(2019.07.01)"}, "인핸스드바이오": {"name": "㈜인핸스드바이오", "total": 500.00079999999997, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.00079999999997}, "note": "siRNA기반 유전자치료제, 23년말 전액감액"}, "MTS나노테크": {"name": "㈜MTS나노테크", "total": 500.0, "sector": "에너지/소재/환경", "funds": {"KoFC펀드 (335억)": 400.0, "신성장 메짜닌펀드 (80억)": 100.0}, "note": "회수불능&해산결의로 감액 (22.06.30)"}, "코센테크": {"name": "㈜코센테크", "total": 500.0, "sector": "제조/산업재", "funds": {"KoFC펀드 (335억)": 500.0}, "note": "(회수:2014.11.06)(단,명의개서:2016.07.01)"}, "에이치앤": {"name": "㈜에이치앤", "total": 500.0, "sector": "소비재/F&B", "funds": {"신성장 메짜닌펀드 (80억)": 500.0}, "note": "농산물 유통 등(회수불능으로 감액 20.12.31)"}, "뉴로피드": {"name": "㈜뉴로피드", "total": 500.0, "sector": "바이오/헬스케어", "funds": {"신성장 메짜닌펀드 (80억)": 500.0}, "note": "(회수완료: 2020.08.31)"}, "크로넥스": {"name": "크로넥스", "total": 500.0, "sector": "바이오/헬스케어", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 500.0}, "note": "비임상CRO,미니피그"}, "뉴웨이블": {"name": "뉴웨이블", "total": 499.999955, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.999955}, "note": "2024.12.31 전액잠식으로 100%감액"}, "위니플": {"name": "㈜위니플", "total": 499.997856, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.997856}, "note": "모바일 APP 제작(영업중단 20.12.31 감액)"}, "제이크리에이션": {"name": "㈜제이크리에이션", "total": 499.95, "sector": "소비재/F&B", "funds": {"신성장 메짜닌펀드 (80억)": 499.95}, "note": "제주용암수 제조\n(회생신청 감액 21.03.31)(회생채권매각)"}, "에프알디": {"name": "㈜에프알디", "total": 499.935803, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.935803}, "note": "23.01.04 자사주방식으로 매각완료"}, "비이아이랩": {"name": "㈜비이아이랩", "total": 499.749888, "sector": "에너지/소재/환경", "funds": {"그린뉴딜 펀드 (300억)": 499.749888}, "note": "리튬메탈 전고체전지 소재 개발"}, "루센트블록": {"name": "㈜루센트블록", "total": 499.716, "sector": "SW/플랫폼", "funds": {"돌핀M&A조합(505.3억)": 499.716}, "note": "부동산 수익증권(EABS) 거래플랫폼"}, "인사이너리": {"name": "㈜인사이너리", "total": 499.20000000000005, "sector": "SW/플랫폼", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 499.20000000000005}, "note": "바이너리 오픈소스 검증 솔루션"}, "씨와이": {"name": "㈜씨와이", "total": 498.0, "sector": "바이오/헬스케어", "funds": {"GS칼텍스 케미칼펀드(157.5억)": 498.0}, "note": "한약탕전 위탁제조 외(가/나목 충족)\n회생신청으로 전액감액(21.03.31)"}, "이앤이매니지먼트": {"name": "이앤이매니지먼트㈜", "total": 450.0, "sector": "에너지/소재/환경", "funds": {"(조합 계정 합계)": 450.0}, "note": "환경/에너지 컨설팅업(회수액 120만원)"}, "이지템": {"name": "㈜이지템", "total": 428.82, "sector": "SW/플랫폼", "funds": {"AIM세컨더리 (550억)": 428.82}, "note": "피부미용,의료기기"}, "엑스엘게임즈": {"name": "㈜엑스엘게임즈", "total": 305.0, "sector": "콘텐츠/교육", "funds": {"신성장 메짜닌펀드 (80억)": 305.0}, "note": "MMORPG(아키에이지,문명온라인)게임사"}, "화인": {"name": "㈜화인", "total": 250.0, "sector": "제조/산업재", "funds": {"(조합 계정 합계)": 250.0}, "note": "(회수완료: 2013.10.11)"}, "유에스티": {"name": "㈜유에스티", "total": 100.0, "sector": "제조/산업재", "funds": {"(조합 계정 합계)": 100.0}, "note": "(회수완료 2018.10.18 708백만원,장내매각)"}, "아시아자원개발": {"name": "아시아자원개발㈜", "total": 1.0, "sector": "에너지/소재/환경", "funds": {"펀드출자 3펀드": 1.0}, "note": "천연자원 수출입업(전액감액.19.12.31)"}, "휴민텍": {"name": "㈜휴민텍", "total": 0.023528, "sector": "AI/로보틱스", "funds": {"그린뉴딜 펀드 (300억)": 0.023528}, "note": ""}, "라인어스": {"name": "㈜라인어스", "total": 0.00217, "sector": "제조/산업재", "funds": {"퍼스트펭귄 스타트업펀드 (390억)": 0.00217}, "note": "보통주전환시 단주입금"}, "티씨티": {"name": "㈜티씨티", "total": 0.000888, "sector": "제조/산업재", "funds": {"돌핀M&A조합(505.3억)": 0.000888}, "note": "비츠로시스 CB 단주대금 입금(22.12.16)"}}};</script>
